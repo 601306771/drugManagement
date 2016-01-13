@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<#if newDrugRequestList??>
+	<#list newDrugRequestList as item >
+			${item.id?default("")}&nbsp;&nbsp; 
+			${item.tdtType?default("")}
+			${item.ddtType?default("")}
+			${item.dName?default("")}
+			${item.dIntroduce?default("")}
+			${item.ndrReason?default("")}
+			${item.ndrStatus?default("")}
+	</#list> 
+</#if>
+
+</body>
+</html>
