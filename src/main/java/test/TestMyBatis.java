@@ -13,30 +13,27 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;  
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  
 
+import silver.api.user.biz.UsersBiz;
 import silver.api.user.biz.userDao;
+import silver.api.user.entity.Users;
 import silver.api.user.entity.user;
   
-//@RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类  
 @ContextConfiguration(locations = {"classpath:application-context.xml"})  
   
 public class TestMyBatis {  
-//    private static Logger logger = Logger.getLogger(TestMyBatis.class);  
-//  private ApplicationContext ac = null;  
+ 
     @Resource  
-    private  userDao  ud= null;  
+    private  UsersBiz  ub= null;  
   
-//  @Before  
-//  public void before() {  
-//      ac = new ClassPathXmlApplicationContext("applicationContext.xml");  
-//      userService = (IUserService) ac.getBean("userService");  
-//  }  
+
   
     @Test  
     public void test1() {  
-        user user = ud.selectByPrimaryKey();  
+    	Users record = new Users(1,"admin","admin",1,"管理员阿花","这是系统的管理员啊");
+        int result = ub.insertSelective(record);
         // System.out.println(user.getUserName());  
         // logger.info("值："+user.getUserName());  
 //        logger.info(user); 
-        System.out.println(user);
+        System.out.println(result);
     }  
 }  
