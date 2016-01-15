@@ -1,9 +1,13 @@
 package silver.api.user.dao;
 
+import java.util.List;
+
 import silver.api.user.entity.Users;
 
 public interface UsersDao {
-	   int deleteByPrimaryKey(Integer id);
+		List<Users> selectByUtype(Integer utype);
+		
+	    int deleteByPrimaryKey(Integer id);
 
 	    int insert(Users record);
 

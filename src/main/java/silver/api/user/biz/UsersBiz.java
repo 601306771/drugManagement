@@ -1,8 +1,12 @@
 package silver.api.user.biz;
 
+import java.util.List;
+
 import silver.api.user.entity.Users;
 
 public interface UsersBiz {
+		List<Users> selectByUtype(Integer utype);
+	
 	    int deleteByPrimaryKey(Integer id);
 
 	    int insert(Users record);

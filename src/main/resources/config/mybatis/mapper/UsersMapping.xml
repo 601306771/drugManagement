@@ -12,16 +12,30 @@
   <sql id="Base_Column_List" >
     id, UNAME, UPASSWORD, UTYPE, UNICKNAME, DISCRIBE
   </sql>
+  
+  <!-- ************分割*************** -->
+  <select id="selectByUtype" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where UTYPE = #{utype,jdbcType=INTEGER}
+  </select>
+  
+  <!-- ************分割*************** -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from users
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <!-- ************分割*************** -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from users
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  
+  <!-- ************分割*************** -->
   <insert id="insert" parameterType="silver.api.user.entity.Users" >
     insert into users (id, UNAME, UPASSWORD, 
       UTYPE, UNICKNAME, DISCRIBE
@@ -30,6 +44,8 @@
       #{utype,jdbcType=INTEGER}, #{unickname,jdbcType=VARCHAR}, #{discribe,jdbcType=VARCHAR}
       )
   </insert>
+  
+  <!-- ************分割*************** -->
   <insert id="insertSelective" parameterType="silver.api.user.entity.Users" >
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -73,6 +89,8 @@
       </if>
     </trim>
   </insert>
+  
+  <!-- ************分割*************** -->
   <update id="updateByPrimaryKeySelective" parameterType="silver.api.user.entity.Users" >
     update users
     <set >
@@ -94,6 +112,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- ************分割*************** -->
   <update id="updateByPrimaryKey" parameterType="silver.api.user.entity.Users" >
     update users
     set UNAME = #{uname,jdbcType=VARCHAR},

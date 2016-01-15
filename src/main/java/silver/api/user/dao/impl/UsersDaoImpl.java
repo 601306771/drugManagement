@@ -1,5 +1,7 @@
 package silver.api.user.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,6 +46,11 @@ public class UsersDaoImpl implements UsersDao {
 	@Override
 	public int updateByPrimaryKey(Users record) {
 		return uMapper.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public List<Users> selectByUtype(Integer utype) {
+		return uMapper.selectByUtype(utype);
 	}
 
 }

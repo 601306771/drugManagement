@@ -1,5 +1,7 @@
 package silver.api.user.biz.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,11 @@ public class UsersBizImpl implements UsersBiz {
 	@Override
 	public int updateByPrimaryKey(Users record) {
 		return uDao.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public List<Users> selectByUtype(Integer utype) {
+		return uDao.selectByUtype(utype);
 	}
 
 }

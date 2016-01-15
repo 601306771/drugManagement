@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="silver.api.detailDrugType.mapper.DetailDrugTypeMapper" >
+  <resultMap id="BaseResultMap" type="silver.api.detailDrugType.entity.DetailDrugType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="DCODE" property="dcode" jdbcType="VARCHAR" />
+    <result column="DNAME" property="dname" jdbcType="VARCHAR" />
+    <result column="DDISCRIBE" property="ddiscribe" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, DCODE, DNAME, DDISCRIBE
+  </sql>
+  
+   <!-- ************分割*************** -->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from detaildrugtype
+  </select>
+  
+  <!-- ************分割*************** -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from detaildrugtype
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- ************分割*************** -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from detaildrugtype
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- ************分割*************** -->
+  <insert id="insert" parameterType="silver.api.detailDrugType.entity.DetailDrugType" >
+    insert into detaildrugtype (id, DCODE, DNAME, 
+      DDISCRIBE)
+    values (#{id,jdbcType=INTEGER}, #{dcode,jdbcType=VARCHAR}, #{dname,jdbcType=VARCHAR}, 
+      #{ddiscribe,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- ************分割*************** -->
+  <insert id="insertSelective" parameterType="silver.api.detailDrugType.entity.DetailDrugType" >
+    insert into detaildrugtype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dcode != null" >
+        DCODE,
+      </if>
+      <if test="dname != null" >
+        DNAME,
+      </if>
+      <if test="ddiscribe != null" >
+        DDISCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dcode != null" >
+        #{dcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dname != null" >
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddiscribe != null" >
+        #{ddiscribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- ************分割*************** -->
+  <update id="updateByPrimaryKeySelective" parameterType="silver.api.detailDrugType.entity.DetailDrugType" >
+    update detaildrugtype
+    <set >
+      <if test="dcode != null" >
+        DCODE = #{dcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dname != null" >
+        DNAME = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddiscribe != null" >
+        DDISCRIBE = #{ddiscribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ************分割*************** -->
+  <update id="updateByPrimaryKey" parameterType="silver.api.detailDrugType.entity.DetailDrugType" >
+    update detaildrugtype
+    set DCODE = #{dcode,jdbcType=VARCHAR},
+      DNAME = #{dname,jdbcType=VARCHAR},
+      DDISCRIBE = #{ddiscribe,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

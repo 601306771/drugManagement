@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="silver.api.supplier.mapper.SupplierMapper" >
+  <resultMap id="BaseResultMap" type="silver.api.supplier.entity.Supplier" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="SCODE" property="scode" jdbcType="VARCHAR" />
+    <result column="SNAME" property="sname" jdbcType="VARCHAR" />
+    <result column="SPHONE" property="sphone" jdbcType="VARCHAR" />
+    <result column="SADDRESS" property="saddress" jdbcType="VARCHAR" />
+    <result column="SDISCRIBE" property="sdiscribe" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, SCODE, SNAME, SPHONE, SADDRESS, SDISCRIBE
+  </sql>
+  
+  <!-- ************分割*************** -->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    
+  </select>
+  
+  <!-- ************分割*************** -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- ************分割*************** -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from supplier
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- ************分割*************** -->
+  <insert id="insert" parameterType="silver.api.supplier.entity.Supplier" >
+    insert into supplier (id, SCODE, SNAME, 
+      SPHONE, SADDRESS, SDISCRIBE
+      )
+    values (#{id,jdbcType=INTEGER}, #{scode,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+      #{sphone,jdbcType=VARCHAR}, #{saddress,jdbcType=VARCHAR}, #{sdiscribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <!-- ************分割*************** -->
+  <insert id="insertSelective" parameterType="silver.api.supplier.entity.Supplier" >
+    insert into supplier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scode != null" >
+        SCODE,
+      </if>
+      <if test="sname != null" >
+        SNAME,
+      </if>
+      <if test="sphone != null" >
+        SPHONE,
+      </if>
+      <if test="saddress != null" >
+        SADDRESS,
+      </if>
+      <if test="sdiscribe != null" >
+        SDISCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scode != null" >
+        #{scode,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sphone != null" >
+        #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null" >
+        #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sdiscribe != null" >
+        #{sdiscribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- ************分割*************** -->
+  <update id="updateByPrimaryKeySelective" parameterType="silver.api.supplier.entity.Supplier" >
+    update supplier
+    <set >
+      <if test="scode != null" >
+        SCODE = #{scode,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        SNAME = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sphone != null" >
+        SPHONE = #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null" >
+        SADDRESS = #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sdiscribe != null" >
+        SDISCRIBE = #{sdiscribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ************分割*************** -->
+  <update id="updateByPrimaryKey" parameterType="silver.api.supplier.entity.Supplier" >
+    update supplier
+    set SCODE = #{scode,jdbcType=VARCHAR},
+      SNAME = #{sname,jdbcType=VARCHAR},
+      SPHONE = #{sphone,jdbcType=VARCHAR},
+      SADDRESS = #{saddress,jdbcType=VARCHAR},
+      SDISCRIBE = #{sdiscribe,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="silver.api.totalDrugType.mapper.TotalDrugTypeMapper" >
+  <resultMap id="BaseResultMap" type="silver.api.totalDrugType.entity.TotalDrugType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="TCODE" property="tcode" jdbcType="VARCHAR" />
+    <result column="TNAME" property="tname" jdbcType="VARCHAR" />
+    <result column="TDISCRIBE" property="tdiscribe" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, TCODE, TNAME, TDISCRIBE
+  </sql>
+  
+  <!-- ************分割*************** -->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from totaldrugtype
+  </select>
+  
+  <!-- ************分割*************** -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from totaldrugtype
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- ************分割*************** -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from totaldrugtype
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- ************分割*************** -->
+  <insert id="insert" parameterType="silver.api.totalDrugType.entity.TotalDrugType" >
+    insert into totaldrugtype (id, TCODE, TNAME, 
+      TDISCRIBE)
+    values (#{id,jdbcType=INTEGER}, #{tcode,jdbcType=VARCHAR}, #{tname,jdbcType=VARCHAR}, 
+      #{tdiscribe,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- ************分割*************** -->
+  <insert id="insertSelective" parameterType="silver.api.totalDrugType.entity.TotalDrugType" >
+    insert into totaldrugtype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tcode != null" >
+        TCODE,
+      </if>
+      <if test="tname != null" >
+        TNAME,
+      </if>
+      <if test="tdiscribe != null" >
+        TDISCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tcode != null" >
+        #{tcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tdiscribe != null" >
+        #{tdiscribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- ************分割*************** -->
+  <update id="updateByPrimaryKeySelective" parameterType="silver.api.totalDrugType.entity.TotalDrugType" >
+    update totaldrugtype
+    <set >
+      <if test="tcode != null" >
+        TCODE = #{tcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null" >
+        TNAME = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tdiscribe != null" >
+        TDISCRIBE = #{tdiscribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- ************分割*************** -->
+  <update id="updateByPrimaryKey" parameterType="silver.api.totalDrugType.entity.TotalDrugType" >
+    update totaldrugtype
+    set TCODE = #{tcode,jdbcType=VARCHAR},
+      TNAME = #{tname,jdbcType=VARCHAR},
+      TDISCRIBE = #{tdiscribe,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
