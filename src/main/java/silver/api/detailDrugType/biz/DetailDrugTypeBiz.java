@@ -5,6 +5,7 @@ import java.util.List;
 import silver.api.detailDrugType.entity.DetailDrugType;
 
 public interface DetailDrugTypeBiz {
+		List<DetailDrugType> selectByTcode(String tcode);
 	
 		List<DetailDrugType> selectAll();
 	 

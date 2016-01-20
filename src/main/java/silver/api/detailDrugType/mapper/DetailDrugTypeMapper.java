@@ -5,6 +5,8 @@ import java.util.List;
 import silver.api.detailDrugType.entity.DetailDrugType;
 
 public interface DetailDrugTypeMapper {
+	List<DetailDrugType> selectByTcode(String tcode);
+	
 	List<DetailDrugType> selectAll();
 	
     int deleteByPrimaryKey(Integer id);

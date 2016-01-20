@@ -50,4 +50,9 @@ public class DetailDrugTypeBizImpl implements DetailDrugTypeBiz {
 		return dDao.updateByPrimaryKey(record);
 	}
 
+	@Override
+	public List<DetailDrugType> selectByTcode(String tcode) {
+		return dDao.selectByTcode(tcode);
+	}
+
 }

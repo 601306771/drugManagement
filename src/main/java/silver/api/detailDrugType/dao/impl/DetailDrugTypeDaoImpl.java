@@ -49,4 +49,9 @@ public class DetailDrugTypeDaoImpl implements DetailDrugTypeDao {
 		return dMapper.updateByPrimaryKey(record);
 	}
 
+	@Override
+	public List<DetailDrugType> selectByTcode(String tcode) {
+		return dMapper.selectByTcode(tcode);
+	}
+
 }

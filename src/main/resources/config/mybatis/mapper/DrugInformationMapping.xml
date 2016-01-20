@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="silver.api.drugInformation.mapper.DrugInformationMapper" >
+  <resultMap id="BaseResultMap" type="silver.api.drugInformation.entity.DrugInformation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="DNAME" property="dname" jdbcType="VARCHAR" />
+    <result column="TCODE" property="tcode" jdbcType="VARCHAR" />
+    <result column="DCODE" property="dcode" jdbcType="VARCHAR" />
+    <result column="DUSAGE" property="dusage" jdbcType="VARCHAR" />
+    <result column="DEXPIRATIONDATE" property="dexpirationdate" jdbcType="VARCHAR" />
+    <result column="DINDICATIONS" property="dindications" jdbcType="VARCHAR" />
+    <result column="DSUITABLE" property="dsuitable" jdbcType="VARCHAR" />
+    <result column="DDISCRIBE" property="ddiscribe" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    id, DNAME, TCODE, DCODE, DUSAGE, DEXPIRATIONDATE, DINDICATIONS, DSUITABLE, DDISCRIBE
+  </sql>
+  
+  
+  <!-- ************分割*************** -->
+  <select id="selectByTcode" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from druginformation
+    where tcode = #{tcode,jdbcType=INTEGER}
+  </select>
+  
+  <!-- ************分割*************** -->
+  <select id="selectByDcode" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from druginformation
+    where dcode = #{dcode,jdbcType=INTEGER}
+  </select>
+  
+  <!-- ************分割*************** -->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from druginformation
+  </select>
+  
+   <!-- ************分割*************** -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from druginformation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+   <!-- ************分割*************** -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from druginformation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+   <!-- ************分割*************** -->
+  <insert id="insert" parameterType="silver.api.drugInformation.entity.DrugInformation" >
+    insert into druginformation (id, DNAME, TCODE, 
+      DCODE, DUSAGE, DEXPIRATIONDATE, 
+      DINDICATIONS, DSUITABLE, DDISCRIBE
+      )
+    values (#{id,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{tcode,jdbcType=VARCHAR}, 
+      #{dcode,jdbcType=VARCHAR}, #{dusage,jdbcType=VARCHAR}, #{dexpirationdate,jdbcType=VARCHAR}, 
+      #{dindications,jdbcType=VARCHAR}, #{dsuitable,jdbcType=VARCHAR}, #{ddiscribe,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+   <!-- ************分割*************** -->
+  <insert id="insertSelective" parameterType="silver.api.drugInformation.entity.DrugInformation" >
+    insert into druginformation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dname != null" >
+        DNAME,
+      </if>
+      <if test="tcode != null" >
+        TCODE,
+      </if>
+      <if test="dcode != null" >
+        DCODE,
+      </if>
+      <if test="dusage != null" >
+        DUSAGE,
+      </if>
+      <if test="dexpirationdate != null" >
+        DEXPIRATIONDATE,
+      </if>
+      <if test="dindications != null" >
+        DINDICATIONS,
+      </if>
+      <if test="dsuitable != null" >
+        DSUITABLE,
+      </if>
+      <if test="ddiscribe != null" >
+        DDISCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dname != null" >
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="tcode != null" >
+        #{tcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dcode != null" >
+        #{dcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dusage != null" >
+        #{dusage,jdbcType=VARCHAR},
+      </if>
+      <if test="dexpirationdate != null" >
+        #{dexpirationdate,jdbcType=VARCHAR},
+      </if>
+      <if test="dindications != null" >
+        #{dindications,jdbcType=VARCHAR},
+      </if>
+      <if test="dsuitable != null" >
+        #{dsuitable,jdbcType=VARCHAR},
+      </if>
+      <if test="ddiscribe != null" >
+        #{ddiscribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+   <!-- ************分割*************** -->
+  <update id="updateByPrimaryKeySelective" parameterType="silver.api.drugInformation.entity.DrugInformation" >
+    update druginformation
+    <set >
+      <if test="dname != null" >
+        DNAME = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="tcode != null" >
+        TCODE = #{tcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dcode != null" >
+        DCODE = #{dcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dusage != null" >
+        DUSAGE = #{dusage,jdbcType=VARCHAR},
+      </if>
+      <if test="dexpirationdate != null" >
+        DEXPIRATIONDATE = #{dexpirationdate,jdbcType=VARCHAR},
+      </if>
+      <if test="dindications != null" >
+        DINDICATIONS = #{dindications,jdbcType=VARCHAR},
+      </if>
+      <if test="dsuitable != null" >
+        DSUITABLE = #{dsuitable,jdbcType=VARCHAR},
+      </if>
+      <if test="ddiscribe != null" >
+        DDISCRIBE = #{ddiscribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <!-- ************分割*************** -->
+  <update id="updateByPrimaryKey" parameterType="silver.api.drugInformation.entity.DrugInformation" >
+    update druginformation
+    set DNAME = #{dname,jdbcType=VARCHAR},
+      TCODE = #{tcode,jdbcType=VARCHAR},
+      DCODE = #{dcode,jdbcType=VARCHAR},
+      DUSAGE = #{dusage,jdbcType=VARCHAR},
+      DEXPIRATIONDATE = #{dexpirationdate,jdbcType=VARCHAR},
+      DINDICATIONS = #{dindications,jdbcType=VARCHAR},
+      DSUITABLE = #{dsuitable,jdbcType=VARCHAR},
+      DDISCRIBE = #{ddiscribe,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

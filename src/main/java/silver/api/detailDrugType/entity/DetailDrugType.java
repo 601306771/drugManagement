@@ -4,16 +4,20 @@ public class DetailDrugType {
     private Integer id;
 
     private String dcode;
+    
+    private String tcode;
 
     private String dname;
 
     private String ddiscribe;
 
     
-    @Override
+    
+
+	@Override
 	public String toString() {
-		return "DetailDrugType [id=" + id + ", dcode=" + dcode + ", dname="
-				+ dname + ", ddiscribe=" + ddiscribe + "]";
+		return "DetailDrugType [id=" + id + ", dcode=" + dcode + ", tcode="
+				+ tcode + ", dname=" + dname + ", ddiscribe=" + ddiscribe + "]";
 	}
 
 	public Integer getId() {
@@ -32,7 +36,17 @@ public class DetailDrugType {
         this.dcode = dcode;
     }
 
-    public String getDname() {
+    
+    
+    public String getTcode() {
+		return tcode;
+	}
+
+	public void setTcode(String tcode) {
+		this.tcode = tcode;
+	}
+
+	public String getDname() {
         return dname;
     }
 
