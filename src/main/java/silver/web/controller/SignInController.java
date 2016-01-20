@@ -15,6 +15,19 @@ public class SignInController {
 	@RequestMapping("/page")
 	public String page(final ModelMap model, 
 			final HttpServletRequest request){	
-		return "page/login";   
+		return "pages/login";   
+	}
+	
+	@RequestMapping("/loading")
+	public String loading(final Integer utype,final ModelMap model, 
+			final HttpServletRequest request){
+		if(utype==1){
+			return "pages/admin/adminWelcome";
+		}else if(utype==1){
+			return "error";
+		}else if(utype==1){
+			return "error";
+		}
+		return "pages/login";   
 	}
 }

@@ -23,6 +23,8 @@
 		<property name="cache" value="true" />
 		<property name="prefix" value="" />
 		<property name="suffix" value=".html" />
+		<!-- 自定义FreeMarkerView，用来定义项目的全局路径 -->
+    	<property name="viewClass" value="silver.utils.MyFreeMarkerView" />
 	</bean>
 
 	<bean id="freeMarkerConfig"
