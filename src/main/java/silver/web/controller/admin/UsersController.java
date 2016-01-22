@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import silver.api.user.biz.UsersBiz;
 import silver.api.user.entity.Users;
@@ -17,6 +18,8 @@ import silver.api.user.entity.Users;
 public class UsersController {
 	@Autowired
 	private UsersBiz ub;
+	
+	
 	
 	/**
 	 * 新增用户
@@ -60,18 +63,27 @@ public class UsersController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/managerList")
-	public String managerList(final Integer utype,final ModelMap model, 
+	@RequestMapping("/userList")
+	public String userList(final Integer utype,final ModelMap model, 
 			final HttpServletRequest request){
 		//TODO 对页面的适配
 		System.out.println(utype);
 		try{
 			List<Users> usersList = ub.selectByUtype(utype);
+			model.put("userList", usersList);
+			model.put("index", 1);
 			System.out.print(usersList);
 		}catch(Exception e){
 			return "error";
 		}
-    	return "userget";
+		
+		if(utype==3){
+			return "pages/admin/usersManage/pharmacyStaffList";
+		}else if(utype==2){
+			return "pages/admin/usersManage/storeroomStaffList";
+		}else{
+			return "error";
+		}
 	}
 	
 
@@ -136,17 +148,59 @@ public class UsersController {
 	 * @return
 	 */
 	@RequestMapping("/deleteUsers")
-	public String deleteUsers(final Integer id,final ModelMap model, 
+	public ModelAndView deleteUsers(final Integer id,final Integer utype,final ModelMap model, 
 			final HttpServletRequest request){
 		//TODO 对页面的适配
 		try{
+			System.out.println("id:" +id +",utype:" +utype );
 			ub.deleteByPrimaryKey(id);
 		}catch(Exception e){
-			return "error";
+			return new ModelAndView( "error");
 		}
-    	return "userget";
+		if(utype==3){
+			return new ModelAndView("redirect:/users/userList?utype=3");
+		}else if(utype==2){
+			return new ModelAndView("redirect:/users/userList?utype=2");
+		}else{
+			return new ModelAndView( "error");
+		}
 	}
 	
+	
+	/**
+	 * 编辑页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/edit")
+	public String edit(final Integer id,final String uname,final String upassword,
+			final Integer utype,final String unickname,final String discribe,
+			final ModelMap model, final HttpServletRequest request){
+		Users record = new Users();
+		record.setId(id);
+		record.setUname(uname);
+		record.setUpassword(upassword);
+		record.setUtype(utype);
+		record.setUnickname(unickname);
+		record.setDiscribe(discribe);
+		System.out.print(record);
+		
+		model.put("user", record);
+		
+		return "pages/admin/usersManage/editUsers";
+	}
+	
+	/**
+	 * error页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/error")
+	public String error(final ModelMap model, final HttpServletRequest request){
+		return "error";
+	}
 	
 	
 	

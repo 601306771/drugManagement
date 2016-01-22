@@ -3,5 +3,7 @@ encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/webapp/WEB-INF/view=UTF-8
 encoding//src/main/webapp/WEB-INF/view/pages/admin/adminWelcome.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/pages/admin/usersManage/pharmacyStaffList.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/pages/admin/usersManage/storeroomStaffList.html=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8
