@@ -166,4 +166,16 @@ public class DetailDrugTypeController {
 		}
 		return "userget";
 	}
+	
+	/**
+	 * 新增页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/addpage")
+	public String addpage(final ModelMap model, final HttpServletRequest request){
+		return "pages/admin/drugType/addDetailType";
+	}
+	
 }

@@ -33,7 +33,7 @@ public class UsersController {
 	 * @return
 	 */
 	@RequestMapping("/addUsers")
-	public String addUsers(final String uname,final String upassword,final Integer utype,
+	public ModelAndView addUsers(final String uname,final String upassword,final Integer utype,
 			final String unickname,final String discribe,final ModelMap model, 
 			final HttpServletRequest request){	
 		//TODO  对页面的适配
@@ -47,11 +47,15 @@ public class UsersController {
 		try{
 			int result = ub.insertSelective(record);
 		}catch(Exception e){
-			return "error";
+			return new ModelAndView( "error");
 		}
-	    	
-		return "userget";
-	    	
+		if(utype==3){
+			return new ModelAndView("redirect:/users/userList?utype=3");
+		}else if(utype==2){
+			return new ModelAndView("redirect:/users/userList?utype=2");
+		}else{
+			return new ModelAndView( "error");
+		}
 	    
 	}
 	
@@ -72,14 +76,13 @@ public class UsersController {
 			List<Users> usersList = ub.selectByUtype(utype);
 			model.put("userList", usersList);
 			model.put("index", 1);
+			model.put("utype",utype);
 			System.out.print(usersList);
 		}catch(Exception e){
 			return "error";
 		}
 		
-		if(utype==3){
-			return "pages/admin/usersManage/pharmacyStaffList";
-		}else if(utype==2){
+		if(utype==3||utype==2){
 			return "pages/admin/usersManage/storeroomStaffList";
 		}else{
 			return "error";
@@ -123,21 +126,28 @@ public class UsersController {
 	 * @return
 	 */
 	@RequestMapping("/updateIfo")
-	public String updateIfo(final Integer id,final String upassword,
-			final String unickname,final String discribe,final ModelMap model, 
+	public ModelAndView updateIfo(final Integer id,final String upassword,final Integer utype,
+			final String unickname,final String discribe,final String uname,final ModelMap model, 
 			final HttpServletRequest request){
 		//TODO 对页面的适配
 		Users record = new Users();
 		record.setId(id);
+		record.setUname(uname);
 		record.setUpassword(upassword);
 		record.setUnickname(unickname);
 		record.setDiscribe(discribe);
 		try{
 			ub.updateByPrimaryKeySelective(record);
 		}catch(Exception e){
-			return "error";
+			return new ModelAndView( "error");
 		}
-    	return "userget";
+		if(utype==3){
+			return new ModelAndView("redirect:/users/userList?utype=3");
+		}else if(utype==2){
+			return new ModelAndView("redirect:/users/userList?utype=2");
+		}else{
+			return new ModelAndView( "error");
+		}
 	}
 	
 	/**
@@ -200,6 +210,17 @@ public class UsersController {
 	@RequestMapping("/error")
 	public String error(final ModelMap model, final HttpServletRequest request){
 		return "error";
+	}
+	
+	/**
+	 * 新增页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/addpage")
+	public String addpage(final ModelMap model, final HttpServletRequest request){
+		return "pages/admin/usersManage/addUsers";
 	}
 	
 	

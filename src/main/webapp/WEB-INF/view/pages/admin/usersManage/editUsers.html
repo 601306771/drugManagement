@@ -382,23 +382,29 @@
 				
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Basic Form Elements
+                            Edit User Info
                         </div>
                         <div class="panel-body">
                             <div class="row">
 								
                                 <div class="col-lg-7">
 									<#if user??>
-	                                    <form role="form">
+	                                    <form role="form" action="${base}/users/updateIfo">
 	                                        <div class="form-group">
 	                                            <label>User Name</label>
-	                                            <input class="form-control" name="uname" value="${user.uname}">
+	                                            <input class="form-control" name="uname" value="${user.uname}" disabled="true">
 	                                            <p class="help-block">This is the only name for sign in.</p>
 	                                        </div>
 	                                        <div class="form-group">
 	                                            <label>Password</label>
 	                                            <input class="form-control" name="upassword" value="${user.upassword}" placeholder="Enter password, default is 123456">
 	                                        </div>
+											
+											<div class="form-group">
+	                                            <label>Re-enter-Password</label>
+	                                            <input class="form-control" name="re_password" value="${user.upassword}" placeholder="Enter password, default is 123456">
+	                                        </div>
+											
 											
 											<div class="form-group">
 	                                            <label>Nick name</label>
