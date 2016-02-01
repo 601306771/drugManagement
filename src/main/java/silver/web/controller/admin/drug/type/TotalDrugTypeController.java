@@ -61,7 +61,7 @@ public class TotalDrugTypeController {
 		}catch(Exception e){
 			return "error";
 		}
-		return "userget";
+		return "pages/admin/drugManage/drugType/totalTypeList";
 	}
 	
 
