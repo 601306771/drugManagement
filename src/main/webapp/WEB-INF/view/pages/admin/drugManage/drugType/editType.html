@@ -17,12 +17,6 @@
     <!-- MetisMenu CSS -->
     <link href="${base}/resource/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- DataTables CSS -->
-    <link href="${base}/resource/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="${base}/resource/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="${base}/resource/dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -375,69 +369,167 @@
 
         <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">DrugTables</h1>
+				
+                <div class="col-lg-10">
+                    <h1 class="page-header">Edit Drug Type</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
+			
+			<div class="row">
+                
+                <div class="col-lg-10">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            DataTables Advanced Tables
+                            	请选择新增类型
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>药品名称</th>
-                                            <th>总分类</th>
-                                            <th>细分类</th>
-                                            <th>用量</th>
-                                            <th>保质期</th>
-											<th>功能主治</th>
-											<th>适宜人群</th>
-											<th>描述</th>
-											<th>操作</th>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-pills">
+                            	<#if totalType??>
+                               		<li class="active"><a href="#home-pills" data-toggle="tab">新增总分类</a>
+                                	</li>
+                                </#if>
+                                <#if detailType??>
+                                	<li class="active"><a href="#profile-pills" data-toggle="tab">新增细分类</a>
+                               		 </li>
+                                </#if>
+                            </ul>
+                            
+							
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+								<#if totalType??>
+									<div class="tab-pane fade in active" id="home-pills">
+								
+                                   <div class="row">
+				
+										<div class="col-lg-1"></div>
+										<div class="col-lg-8">
+											<div class="row">
+														
+														<div class="col-lg-9">
+															<#if totalType??>
+															<form role="form" action="${base}/totalDrugType/updateType">
+																<div class="form-group">
+																	<label>总分类</label>
+																	<input class="form-control" name="tcode" value="${totalType.tcode}">
+																	<p class="help-block">This is the only sign to recognize totalType.</p>
+																</div>
+																
+																<div class="form-group">
+																	<label>分类名称</label>
+																	<input class="form-control" name="tname" value="${totalType.tname}" placeholder="type name" >
+																</div>
+																
+																<div class="form-group">
+																	<label>描述</label>
+																	<input class="form-control" name="tdiscribe"  value="${totalType.tdiscribe}" placeholder="type discribe">
+																</div>
+																
+																<input type="hidden" name="id" value="${totalType.id}" />
+																
+																<div style = "text-align:center;margin:0 auto;">
+																	<button type="submit" class="btn btn-success">Submit Ifo</button>&nbsp;&nbsp;&nbsp;
+																	<button type="reset" class="btn btn-warning">Reset Ifo</button>
+																</div>
+															</form>
+															</#if>
+														</div>
+														<!-- /.col-lg-6 (nested) -->
+														<div class="col-lg-1"></div>
+													</div>
+													<!-- /.row (nested) -->
 											
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <#if ifoList??>
-											<#list ifoList as list>
-												<tr class="gradeA">
-													<td>${list.dname}</td>
-													<td>${list.tcode}</td>
-													<td>${list.dcode}</td>
-													<td>${list.dusage}</td>
-													<td>${list.dexpirationdate}</td>
-													<td>${list.dindications}</td>
-													<td>${list.dsuitable}</td>
-													<td>${list.ddiscribe}</td>
-													<td><a href="${base}/drugIfo/edit?id=${list.id}&dname=${list.dname}&tcode=${list.tcode}&dcode=${list.dcode}&dusage=${list.dusage}&dexpirationdate=${list.dexpirationdate}&dindications=${list.dindications}&dsuitable=${list.dsuitable}&ddiscribe=${list.ddiscribe}" class="btn btn-outline btn-warning btn-xs" >Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-														<a href="${base}/drugIfo/delectIfo?id=${list.id}" class="btn btn-outline btn-danger btn-xs">delete</a>
-													</td>
-												</tr>
-											</#list>
-										</#if>
-                                      
-                                      
-                                    </tbody>
-                                </table>
+										</div>
+										<div class="col-lg-3"></div>
+									   <!-- /.col-lg-12 -->
+									</div>
+									<!-- /.row -->					 
+								</div>
+                                </#if>
+								
+								<#if detailType??>
+									<div class="tab-pane fade in active" id="profile-pills">
+                                    <div class="row">
+				
+										<div class="col-lg-1"></div>
+										<div class="col-lg-8">
+											<div class="row">
+														
+														<div class="col-lg-9">
+														
+															<form role="form" action="${base}/detailDrugType/updateType">
+																<!-- <div class="form-group">
+																	<label>总分类</label>
+																	<input class="form-control" name="tcode" value="${detailType.tcode}">
+																	<p class="help-block">This is the only sign to recognize totalType.</p>
+																</div> -->
+																
+																<#if typeList??>
+																	<div class="form-group">
+							                                            <label>Selects</label>
+							                                            <select name="tcode" class="form-control">
+							                                                <#list typeList as list>
+							                                                	<#if detailType.tcode==list.tcode>
+							                                                		<option value="${list.tcode}" selected>总分类名称：${list.tname}</option>
+																				<#else>
+																					<option value="${list.tcode}">总分类名称：${list.tname}</option>
+																				</#if>
+																			</#list>
+							                                            </select>
+							                                        </div>
+						                                        	
+																</#if>
+																
+																<div class="form-group">
+																	<label>细分类</label>
+																	<input class="form-control" value="${detailType.dcode}" name="dcode">
+																	<p class="help-block">This is the only sign to recognize detailType.</p>
+																</div>
+																<div class="form-group">
+																	<label>分类名称</label>
+																	<input class="form-control" value="${detailType.dname}" name="dname"  placeholder="type name">
+																</div>
+																
+																<div class="form-group">
+																	<label>描述</label>
+																	<input class="form-control" value="${detailType.ddiscribe}"  name="ddiscribe" placeholder="type discribe">
+																</div>
+																
+																<input type="hidden" name="id" value="${detailType.id}" />
+																
+																<div style = "text-align:center;margin:0 auto;">
+																	<button type="submit" class="btn btn-success">Submit Ifo</button>&nbsp;&nbsp;&nbsp;
+																	<button type="reset" class="btn btn-warning">Reset Ifo</button>
+																</div>
+															</form>
+														</div>
+														<!-- /.col-lg-6 (nested) -->
+														<div class="col-lg-1"></div>
+													</div>
+													<!-- /.row (nested) -->
+											
+										</div>
+										<div class="col-lg-3"></div>
+									   <!-- /.col-lg-12 -->
+									</div>
+									<!-- /.row -->	
+								</div>
+								</#if>
                             </div>
-                            <!-- /.table-responsive -->
-                       </div>
+                        </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
                 </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.col-lg-6 -->
             </div>
             <!-- /.row -->
-
+			
+           
         </div>
         <!-- /#page-wrapper -->
 
@@ -453,21 +545,8 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="${base}/resource/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- DataTables JavaScript -->
-    <script src="${base}/resource/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="${base}/resource/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="${base}/resource/dist/js/sb-admin-2.js"></script>
-
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
-    });
-    </script>
 
 </body>
 

@@ -1,0 +1,5 @@
+﻿1.用户细分类加字段：总分类名称
+2.暂时没想到
+
+
+当前进度：drugIfo list搞定，差edit和delect和add

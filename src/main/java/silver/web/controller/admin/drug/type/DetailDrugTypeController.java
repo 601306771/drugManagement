@@ -8,16 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import silver.api.detailDrugType.biz.DetailDrugTypeBiz;
 import silver.api.detailDrugType.entity.DetailDrugType;
 import silver.api.totalDrugType.biz.TotalDrugTypeBiz;
+import silver.api.totalDrugType.entity.TotalDrugType;
 
 @Controller
 @RequestMapping("/detailDrugType")
 public class DetailDrugTypeController {
 	@Autowired
 	private DetailDrugTypeBiz db;
+	@Autowired
+	private TotalDrugTypeBiz tb;
+
 	
 	/**
 	 * 根据总分类的标识TCODE来获取此总分类的细分类
@@ -79,11 +84,11 @@ public class DetailDrugTypeController {
 		try{
 			List<DetailDrugType> typeList = db.selectAll();
 			System.out.println(typeList);
-			
+			model.put("typeList",typeList);
 		}catch(Exception e){
 			return "error";
 		}
-		return "userget";
+		return "pages/admin/drugManage/drugType/detailTypeList";
 	}
 	
 
@@ -97,7 +102,7 @@ public class DetailDrugTypeController {
 	 * @return
 	 */
 	@RequestMapping("/addType")
-	public String addType(final String dcode,final String tcode,final String dname,
+	public ModelAndView addType(final String dcode,final String tcode,final String dname,
 			final String ddiscribe,final ModelMap model,
 			final HttpServletRequest request){
 		//TODO 适配界面
@@ -110,10 +115,10 @@ public class DetailDrugTypeController {
 		try{
 			db.insertSelective(record);
 		}catch(Exception e){
-			return "error";
+			return new ModelAndView("redirect:/error");
 		}
 	    	
-		return "userget";
+		return new ModelAndView("redirect:/detailDrugType/typeList");
 	}
 	
 	/**
@@ -124,16 +129,17 @@ public class DetailDrugTypeController {
 	 * @return
 	 */
 	@RequestMapping("/delectType")
-	public String delectType(final Integer id,final ModelMap model,
+	public ModelAndView delectType(final Integer id,final ModelMap model,
 			final HttpServletRequest request){
 		//TODO 适配页面
 		
 		try{
 			db.deleteByPrimaryKey(id);
 		}catch(Exception e){
-			return "error";
+			return new ModelAndView("redirect:/error");
 		}
-		return "userget";
+	    	
+		return new ModelAndView("redirect:/detailDrugType/typeList");
 	}
 	
 	
@@ -148,7 +154,7 @@ public class DetailDrugTypeController {
 	 * @return
 	 */
 	@RequestMapping("/updateType")
-	public String updateSupplier(final Integer id,final String dcode,final String tcode,final String dname,
+	public ModelAndView updateSupplier(final Integer id,final String dcode,final String tcode,final String dname,
 			final String ddiscribe,final ModelMap model,
 			final HttpServletRequest request){
 		//TODO 适配页面
@@ -162,10 +168,53 @@ public class DetailDrugTypeController {
 		try{
 			db.updateByPrimaryKeySelective(record);
 		}catch(Exception e){
+			return new ModelAndView("redirect:/error");
+		}
+	    	
+		return new ModelAndView("redirect:/detailDrugType/typeList");
+	}
+	
+	/**
+	 * 编辑页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/edit")
+	public String edit(final Integer id,final String dname,final String dcode,
+			final String tcode,final String ddiscribe,final ModelMap model, 
+			final HttpServletRequest request){
+		DetailDrugType record = new DetailDrugType();
+		record.setId(id);
+		record.setDname(dname);
+		record.setTcode(tcode);
+		record.setDcode(dcode);
+		record.setDdiscribe(ddiscribe);
+		System.out.print(record);
+		//总分类列表
+		try{
+			List<TotalDrugType> typeList = tb.selectAll();
+			System.out.println(typeList);
+			model.put("typeList", typeList);
+		}catch(Exception e){
 			return "error";
 		}
-		return "userget";
+		model.put("detailType", record);
+		return "pages/admin/drugManage/drugType/editType";
 	}
+	
+	/**
+	 * error页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/error")
+	public String error(final ModelMap model, final HttpServletRequest request){
+		return "error";
+	}
+	
+	
 	
 	/**
 	 * 新增页面跳转

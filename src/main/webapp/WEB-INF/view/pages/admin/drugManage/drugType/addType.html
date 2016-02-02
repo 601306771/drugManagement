@@ -449,12 +449,26 @@
 														<div class="col-lg-9">
 														
 															<form role="form" action="${base}/detailDrugType/addType">
-																<div class="form-group">
+																
+																<!-- <div class="form-group">
 																	<label>总分类</label>
 																	<input class="form-control" name="tcode">
 																	<p class="help-block">This is the only sign to recognize totalType.</p>
-																</div>
+																</div> -->
+																<#if typeList??>
+																	<div class="form-group">
+							                                            <label>Selects</label>
+							                                            <select name="tcode" class="form-control">
+							                                                <#list typeList as list>
+																				<option value="${list.tcode}">总分类名称：${list.tname}</option>
+																			</#list>
+							                                            </select>
+							                                        </div>
+						                                        	
+																</#if>
 																
+																	
+						                                    
 																<div class="form-group">
 																	<label>细分类</label>
 																	<input class="form-control" name="dcode">
@@ -462,12 +476,12 @@
 																</div>
 																<div class="form-group">
 																	<label>分类名称</label>
-																	<input class="form-control" name="tname"  placeholder="type name">
+																	<input class="form-control" name="dname"  placeholder="type name">
 																</div>
 																
 																<div class="form-group">
 																	<label>描述</label>
-																	<input class="form-control" name="tdiscribe" placeholder="type discribe">
+																	<input class="form-control" name="ddiscribe" placeholder="type discribe">
 																</div>
 																
 																<div style = "text-align:center;margin:0 auto;">

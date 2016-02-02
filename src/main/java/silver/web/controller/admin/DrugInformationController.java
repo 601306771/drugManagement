@@ -8,15 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import silver.api.detailDrugType.biz.DetailDrugTypeBiz;
+import silver.api.detailDrugType.entity.DetailDrugType;
 import silver.api.drugInformation.biz.DrugInformationBiz;
 import silver.api.drugInformation.entity.DrugInformation;
+import silver.api.totalDrugType.biz.TotalDrugTypeBiz;
+import silver.api.totalDrugType.entity.TotalDrugType;
 
 @Controller
 @RequestMapping("/drugIfo")
 public class DrugInformationController {
 	@Autowired
 	private DrugInformationBiz di;
+	@Autowired
+	private DetailDrugTypeBiz db;
+
 	
 	/**
 	 * 根据总分类的标识TCODE来获取此药品信息
@@ -99,12 +107,12 @@ public class DrugInformationController {
 		try{
 			List<DrugInformation> drugInformationList = di.selectAll();
 			System.out.println(drugInformationList);
-			
+			model.put("ifoList", drugInformationList);
 		}catch(Exception e){
 			return "error";
 		}
-		return "userget";
-	}
+		return "pages/admin/drugManage/drugIfo/drugList";
+}
 	
 
 	/**
@@ -117,29 +125,29 @@ public class DrugInformationController {
 	 * @return
 	 */
 	@RequestMapping("/addIfo")
-	public String addIfo(final String dsuitable,final String dindications,final String dcode,
+	public ModelAndView addIfo(final String dsuitable,final String dindications,final String dcode,final String codes,
 			final String dexpirationdate,final String dusage,final String tcode,final String dname,
 			final String ddiscribe,final ModelMap model,
 			final HttpServletRequest request){
 		//TODO 适配界面
-		
+		String[] temp = codes.split(",");
 		DrugInformation record = new DrugInformation();
 		record.setDsuitable(dsuitable);
 		record.setDindications(dindications);
 		record.setDexpirationdate(dexpirationdate);
 		record.setDusage(dusage);
-		record.setDcode(dcode);
-		record.setTcode(tcode);
+		record.setDcode(temp[1].trim());
+		record.setTcode(temp[0].trim());
 		record.setDname(dname);
 		record.setDdiscribe(ddiscribe);
 		
 		try{
 			di.insertSelective(record);
 		}catch(Exception e){
-			return "error";
+			return new ModelAndView("redirect:/drugIfo/error");
 		}
 	    	
-		return "userget";
+		return new ModelAndView("redirect:/drugIfo/ifoList");
 	}
 	
 	/**
@@ -150,16 +158,17 @@ public class DrugInformationController {
 	 * @return
 	 */
 	@RequestMapping("/delectIfo")
-	public String delectIfo(final Integer id,final ModelMap model,
+	public ModelAndView delectIfo(final Integer id,final ModelMap model,
 			final HttpServletRequest request){
 		//TODO 适配页面
 		
 		try{
 			di.deleteByPrimaryKey(id);
 		}catch(Exception e){
-			return "error";
+			return new ModelAndView("redirect:/drugIfo/error");
 		}
-		return "userget";
+	    	
+		return new ModelAndView("redirect:/drugIfo/ifoList");
 	}
 	
 	
@@ -174,12 +183,61 @@ public class DrugInformationController {
 	 * @return
 	 */
 	@RequestMapping("/updateIfo")
-	public String updateIfo(final Integer id,final String dsuitable,final String dindications,final String dcode,
-			final String dexpirationdate,final String dusage,final String tcode,final String dname,
+	public ModelAndView updateIfo(final Integer id,final String dsuitable,final String dindications,
+			final String dcode,final String tcode,final String codes,
+			final String dexpirationdate,final String dusage,final String dname,
 			final String ddiscribe,final ModelMap model,
 			final HttpServletRequest request){
 		//TODO 适配界面
-		
+		String[] temp = codes.split(",");
+		DrugInformation record = new DrugInformation();
+		record.setId(id);
+		record.setDsuitable(dsuitable);
+		record.setDindications(dindications);
+		record.setDexpirationdate(dexpirationdate);
+		record.setDusage(dusage);
+		record.setDcode(temp[1].trim());
+		record.setTcode(temp[0].trim());
+		record.setDname(dname);
+		record.setDdiscribe(ddiscribe);
+		System.out.println(record);
+		try{
+			di.updateByPrimaryKeySelective(record);
+		}catch(Exception e){
+			return new ModelAndView("redirect:/drugIfo/error");
+		}
+	    	
+		return new ModelAndView("redirect:/drugIfo/ifoList");
+	}
+	
+	/**
+	 * 新增页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/addpage")
+	public String addpage(final ModelMap model, final HttpServletRequest request){
+		try{
+			List<DetailDrugType> detailType = db.selectAll();
+			model.put("detailType",detailType);
+		}catch(Exception e){
+			return "error";
+		}
+		return "pages/admin/drugManage/drugIfo/addIfo";
+	}
+	
+	/**
+	 * 编辑页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/edit")
+	public String edit(final Integer id,final String dname,final String tcode,final String dcode,
+			final String dusage,final String dexpirationdate,final String dindications,final String dsuitable,
+			final String ddiscribe,final ModelMap model, 
+			final HttpServletRequest request){
 		DrugInformation record = new DrugInformation();
 		record.setId(id);
 		record.setDsuitable(dsuitable);
@@ -191,12 +249,28 @@ public class DrugInformationController {
 		record.setDname(dname);
 		record.setDdiscribe(ddiscribe);
 		
+		System.out.print(record);
+		//总分类列表
 		try{
-			di.updateByPrimaryKeySelective(record);
+			List<DetailDrugType> detailType = db.selectAll();
+			model.put("detailType",detailType);
 		}catch(Exception e){
 			return "error";
 		}
-		return "userget";
+		model.put("drugIfo", record);
+		return "pages/admin/drugManage/drugIfo/editIfo";
 	}
+	
+	/**
+	 * error页面跳转
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/error")
+	public String error(final ModelMap model, final HttpServletRequest request){
+		return "error";
+	}
+	
 
 }
