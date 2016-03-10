@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/webapp/WEB-INF/view=UTF-8
+encoding//src/main/webapp/WEB-INF/view/error.html=UTF-8
 encoding//src/main/webapp/WEB-INF/view/pages/admin/adminWelcome.html=UTF-8
 encoding//src/main/webapp/WEB-INF/view/pages/admin/drugManage/drugIfo/addIfo.html=UTF-8
 encoding//src/main/webapp/WEB-INF/view/pages/admin/drugManage/drugIfo/editIfo.html=UTF-8

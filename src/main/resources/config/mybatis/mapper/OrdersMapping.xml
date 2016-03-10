@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="silver.api.orders.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="silver.api.orders.entity.Orders" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="OCODE" property="ocode" jdbcType="VARCHAR" />
+    <result column="DATE" property="date" jdbcType="TIMESTAMP" />
+    <result column="PRICES" property="prices" jdbcType="INTEGER" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    id, OCODE, DATE, PRICES, STATE
+  </sql>
+  
+  <select id="selectByState" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where state = #{state,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="silver.api.orders.entity.Orders" >
+    insert into orders (id, OCODE, DATE, 
+      PRICES, STATE)
+    values (#{id,jdbcType=INTEGER}, #{ocode,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
+      #{prices,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="silver.api.orders.entity.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ocode != null" >
+        OCODE,
+      </if>
+      <if test="date != null" >
+        DATE,
+      </if>
+      <if test="prices != null" >
+        PRICES,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ocode != null" >
+        #{ocode,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prices != null" >
+        #{prices,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="silver.api.orders.entity.Orders" >
+    update orders
+    <set >
+      <if test="ocode != null" >
+        OCODE = #{ocode,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        DATE = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prices != null" >
+        PRICES = #{prices,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="silver.api.orders.entity.Orders" >
+    update orders
+    set OCODE = #{ocode,jdbcType=VARCHAR},
+      DATE = #{date,jdbcType=TIMESTAMP},
+      PRICES = #{prices,jdbcType=INTEGER},
+      STATE = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

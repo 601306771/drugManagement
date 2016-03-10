@@ -272,5 +272,30 @@ public class DrugInformationController {
 		return "error";
 	}
 	
+	/**
+	 * 添加测试数据
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/addDatas")
+	public String addDatas(final ModelMap model,final HttpServletRequest request){
+		//TODO 适配界面
+		for(int i=1;i<2000;i++){
+			String data = String.valueOf(i);
+			DrugInformation record = new DrugInformation();
+			record.setDsuitable(data);
+			record.setDindications(data);
+			record.setDexpirationdate(data);
+			record.setDusage(data);
+			record.setDcode(data);
+			record.setTcode(data);
+			record.setDname(data);
+			record.setDdiscribe(data);
+			di.insertSelective(record);
+		}
+	
+		return "error";
+	}
 
 }

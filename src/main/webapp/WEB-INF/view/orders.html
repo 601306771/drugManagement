@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<html xmlns="">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+        <title>New Web Project</title>
+        <script type="text/javascript" src="${base}/resource/bower_components/jquery/dist/jquery.min.js">
+        </script>
+        <script type="text/javascript">
+        // 鼠标移动到表格某一行，这一行的背景色变红，鼠标移开，还原背景色
+            $(document).ready(function(){
+                $("tr").bind('mouseover', function(){
+                    $(this).css("background-color", "red").css("cursor", "hand");
+                });
+                $("tr").bind('mouseout', function(){
+                    $(this).css("background-color", "");
+                });
+// 给表格的每一行都绑定一个单击事件，用来触发弹出div对话框的函数
+                $("tr").bind('click', function(){
+                    $("#divResource").show();
+                    getAbsPoint($(this).get(0));
+                });
+            });
+            // 取得空间的坐标位置
+            function getAbsPoint(e){
+                var x = e.offsetLeft, y = e.offsetTop;
+                while (e = e.offsetParent) {
+                    x += e.offsetLeft;
+                    y += e.offsetTop;
+                }
+// 给弹出的div设置样式 和空间坐标
+                $("#divResource").css({
+                    top: y,
+                    left: x + 400,
+width:'300px',
+height:'200px'
+                });
+            }
+            
+            // 关闭弹出框
+            function closeDiv(){
+                $("#divResource").hide();
+            }
+        </script>
+    </head>
+    <body>
+        表格
+        <br/$amp;>amp;$lt;hr size="3"/>
+        <table border="1" width="400px" height="300px" bgcolor="gray">
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    列一
+                </td>
+                <td>
+                    列二
+                </td>
+                <td>
+                    列三
+                </td>
+                <td>
+                    列四
+                </td>
+            </tr>
+        </table>
+        <div id="divResource" >
+    <p>
+    <span >
+    <a javascript:void(0)" title="关闭古诗欣赏" onclick="closeDiv();">关闭古诗欣赏</a>
+    </span>
+<hr size="2"/>
+<center>
+床前明月光，<br/$amp;>amp;$lt;br/>
+疑似地上霜；<br/$amp;>amp;$lt;br/>
+举头望明月，<br/$amp;>amp;$lt;br/>
+低头思故乡。
+</center>	    
+    </p>
+        </div>
+    </body>
+</html>
