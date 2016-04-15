@@ -87,6 +87,49 @@ CREATE TABLE `orders_details` (
 
 /*Data for the table `orders_details` */
 
+/*Table structure for table `sales_volume` */
+
+DROP TABLE IF EXISTS `sales_volume`;
+
+CREATE TABLE `sales_volume` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `DRUG_NAME` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `COUNT` int(11) DEFAULT NULL,
+  `TIME` time DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='销售单';
+
+/*Data for the table `sales_volume` */
+
+/*Table structure for table `sell_order` */
+
+DROP TABLE IF EXISTS `sell_order`;
+
+CREATE TABLE `sell_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `SO_CODE` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DAY` timestamp NULL DEFAULT NULL,
+  `PRICE` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='销售单';
+
+/*Data for the table `sell_order` */
+
+/*Table structure for table `sell_order_detail` */
+
+DROP TABLE IF EXISTS `sell_order_detail`;
+
+CREATE TABLE `sell_order_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `SO_CODE` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DRUG_NAME` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DAY` timestamp NULL DEFAULT NULL,
+  `PRICE` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='销售单';
+
+/*Data for the table `sell_order_detail` */
+
 /*Table structure for table `supplier` */
 
 DROP TABLE IF EXISTS `supplier`;
