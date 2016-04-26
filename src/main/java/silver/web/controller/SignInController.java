@@ -23,8 +23,8 @@ public class SignInController {
 			final HttpServletRequest request){
 		if(utype==1){
 			return "pages/admin/adminWelcome";
-		}else if(utype==1){
-			return "error";
+		}else if(utype==2){
+			return "pages/storeRoomStaff/storeRoomStaffWelcome";
 		}else if(utype==1){
 			return "error";
 		}
