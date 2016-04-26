@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import silver.api.user.biz.UsersBiz;
 import silver.api.user.entity.Users;
+import silver.utils.EncodingTool;
 
 @Controller
 @RequestMapping("/users")
@@ -187,6 +188,7 @@ public class UsersController {
 	public String edit(final Integer id,final String uname,final String upassword,
 			final Integer utype,final String unickname,final String discribe,
 			final ModelMap model, final HttpServletRequest request){
+		System.out.print(EncodingTool.encodeStr(unickname));
 		Users record = new Users();
 		record.setId(id);
 		record.setUname(uname);
