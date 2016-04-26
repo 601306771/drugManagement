@@ -152,28 +152,136 @@
             <div class="row">
 				<div class="col-lg-1"></div> <!-- /.col-lg-2 -->
 
-                 <div class="col-lg-8">
-                    <div class="panel panel-default">
+                 <div class="col-lg-10">
+                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            添加新采购计划
+                            Context Classes
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                           
-                            <p>
-								<BR>
-                                <button type="button" class="btn btn-outline btn-primary btn-lg btn-block">添加新采购计划</button>
-                            </p>
+                             <#if order??>
+			                     <div class="table-responsive">
+			                         <table class="table">
+			                         	
+			                             <thead>
+			                                 <tr>
+			                                     <th>订单编号</th>
+			                                     <th>订单日期</th>
+			                                     <th>订单价格</th>
+			                                     <th>订单状态</th>
+			                                 </tr>
+			                             </thead>
+			                             <tbody>
+			                             
+			                                 <tr class="warning">
+			                                     <td>${order.ocode}</td>
+			                                     <td>${order.date?datetime}</td>
+			                                     <td>${order.prices}</td>
+			                                     <td>${order.state}</td>
+			                                 </tr>
+			                             </tbody>
+			                         </table>
+			                     </div>
+			                     <!-- /.table-responsive -->
+			                  </#if>
+			                  
+			                  <#if ordersDetailsList??>
+			                  sdfsfsdf
+			                  	  	<#list ordersDetailsList as ordersDetails>
+			                  	  		${ordersDetails.ocode}
+			                  	  		${ordersDetails.dname}
+			                  	  		${ordersDetails.price}
+			                  	  		${ordersDetails.quantity}
+			                  	  	</#list>
+			                  	  	
+			                  	  	 <form action="${base}/purchasePlan/addItems">
+			                  	  	 		<input type="hidden" name="order_ocode" value ="${order.ocode}"/>
+			                  	  	 		<input type="hidden" name="order_date" value ="${order.date?datetime}"/>
+			                  	  	 		<input type="hidden" name="order_prices" value ="${order.prices}"/>
+			                  	  	 		<input type="hidden" name="order_state" value ="${order.state}"/>
+               		                        <div class="table-responsive">
+			                                <table class="table">
+			                                    <thead>
+			                                        <tr>
+			                                            <th></th>
+			                                            <th></th>
+			                                            <th></th>
+			                                            <th></th>
+			                                        </tr>
+			                                    </thead>
+			                                    <tbody>
+			                                        <tr>
+					                  		 	<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品名称</label>
+													<input name="dname" class="form-control" type="text">
+												</div></td>
+					                  		 	<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品价格</label>
+													<input name="price" class="form-control" type="text">
+												</div></td>
+												<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品数量</label>
+													<input name="qunantity" class="form-control" type="text">
+												</div></td>
+					                  		 	<td><br><input type="submit"  class="btn btn-success" value="添加"></a></td>
+			                  		 		</tr>
+			                                    </tbody>
+			                                </table>
+			                            </div>
+			                            <!-- /.table-responsive -->	
+			                  		 
+			                  		 </form>
+			                  		 
+			                  <#else>
+			                  		88888 
+			                  		 <form action="${base}/purchasePlan/addItems">
+				                  		 <input type="hidden" name="order_ocode" value ="${order.ocode}"/>
+		                  	  	 		 <input type="hidden" name="order_date" value ="${order.date?datetime}"/>
+		                  	  	 		 <input type="hidden" name="order_prices" value ="${order.prices}"/>
+				                  	  	 <input type="hidden" name="order_state" value ="${order.state}"/>
+               		                     <div class="table-responsive">
+			                                <table class="table">
+			                                    <thead>
+			                                        <tr>
+			                                            <th></th>
+			                                            <th></th>
+			                                            <th></th>
+			                                            <th></th>
+			                                        </tr>
+			                                    </thead>
+			                                    <tbody>
+			                                        <tr>
+					                  		 	<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品名称</label>
+													<input name="dname" class="form-control" type="text">
+												</div></td>
+					                  		 	<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品价格</label>
+													<input name="price" class="form-control" type="text">
+												</div></td>
+												<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品数量</label>
+													<input name="qunantity" class="form-control" type="text">
+												</div></td>
+					                  		 	<td><br><input type="submit"  class="btn btn-success" value="添加"></a></td>
+			                  		 		</tr>
+			                                    </tbody>
+			                                </table>
+			                            </div>
+			                            <!-- /.table-responsive -->	
+			                  		 
+			                  		 </form>
+			                  		 
+			                  </#if>
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    
+                   
 
-                    </div>
-                    <!-- /.panel -->
+                   
                 </div>
-                <!-- /.col-lg-8 -->
+                <!-- /.col-lg-10 -->
 			</div>
             <!-- /.row -->
         </div>
