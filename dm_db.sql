@@ -43,11 +43,11 @@ CREATE TABLE `druginformation` (
   `TCODE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `DCODE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `DUSAGE` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `DEXPIRATIONDATE` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DEXPIRATIONDATE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `DINDICATIONS` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DSUITABLE` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DDISCRIBE` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`,`TCODE`,`DCODE`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2008 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='药品信息';
 
 /*Data for the table `druginformation` */
@@ -80,11 +80,11 @@ CREATE TABLE `orders` (
   `PRICES` int(11) NOT NULL,
   `STATE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单表';
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单表';
 
 /*Data for the table `orders` */
 
-insert  into `orders`(`id`,`OCODE`,`DATE`,`PRICES`,`STATE`) values (18,'201602291918','2016-02-29 19:18:50',2000,'PASS'),(19,'201602291919','2016-02-29 19:19:15',3000,'NEW'),(20,'201603081730','2016-03-08 17:30:24',52454,'OLD'),(21,'201603081731','2016-03-08 17:31:28',454554,'REFUSE'),(22,'201603081732','2016-03-08 17:32:30',45545454,'NEW');
+insert  into `orders`(`id`,`OCODE`,`DATE`,`PRICES`,`STATE`) values (82,'20160427150806','2016-04-27 15:08:06',0,'NEW'),(92,'20160427160119','2016-04-27 16:01:19',0,'NEW');
 
 /*Table structure for table `orders_details` */
 
@@ -96,10 +96,12 @@ CREATE TABLE `orders_details` (
   `DNAME` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `PRICES` int(11) NOT NULL,
   `QUANTITY` int(20) NOT NULL,
-  PRIMARY KEY (`id`,`OCODE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单表';
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单表';
 
 /*Data for the table `orders_details` */
+
+insert  into `orders_details`(`id`,`OCODE`,`DNAME`,`PRICES`,`QUANTITY`) values (43,'20160427150806','所得税的发送到发送到',33,56),(48,'20160427160119','啥地方所得税地方',322,33),(51,'20160427150806','算法是电风扇的',323,333),(52,'20160427150806','胜多负少',3,3);
 
 /*Table structure for table `pricing` */
 
@@ -110,7 +112,7 @@ CREATE TABLE `pricing` (
   `DCODE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `DNAME` varbinary(20) NOT NULL,
   `PRCICE` float NOT NULL,
-  PRIMARY KEY (`ID`,`DCODE`)
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `pricing` */
@@ -124,7 +126,7 @@ CREATE TABLE `sell_order` (
   `SO_CODE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `DAY` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `PRICE` float NOT NULL,
-  PRIMARY KEY (`id`,`SO_CODE`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='销售单';
 
 /*Data for the table `sell_order` */
@@ -140,7 +142,7 @@ CREATE TABLE `sell_order_detail` (
   `DAY` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `PRICE` float NOT NULL,
   `QUANTITY` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`SO_CODE`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='销售单';
 
 /*Data for the table `sell_order_detail` */
@@ -156,7 +158,7 @@ CREATE TABLE `supplier` (
   `SPHONE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `SADDRESS` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `SDISCRIBE` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`,`SCODE`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='供应商表';
 
 /*Data for the table `supplier` */
@@ -172,7 +174,7 @@ CREATE TABLE `totaldrugtype` (
   `TCODE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `TNAME` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `TDISCRIBE` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`,`TCODE`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='药品总分类';
 
 /*Data for the table `totaldrugtype` */
@@ -190,12 +192,12 @@ CREATE TABLE `users` (
   `UTYPE` int(11) NOT NULL,
   `UNICKNAME` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `DISCRIBE` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`,`UNAME`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户列表';
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`UNAME`,`UPASSWORD`,`UTYPE`,`UNICKNAME`,`DISCRIBE`) values (1,'admin','admin',1,'管理员阿花','这是系统的管理员啊'),(3,'name3','123456',3,'nicktest','discribeyyxx'),(4,'AAA','AAA',2,'AAA','AAA'),(5,'BBB','BBBeee',2,'BBB','BBB'),(6,'CCC','CCC',2,'CCCee','CCCee'),(7,'DDD','DDD11',2,'DDDedit','DDDedit'),(11,'EEE','EEE',2,'EEE','EEEy'),(12,'222','222',3,'222','222');
+insert  into `users`(`id`,`UNAME`,`UPASSWORD`,`UTYPE`,`UNICKNAME`,`DISCRIBE`) values (1,'admin','admin',2,'管理员阿发','这是系统的管理员啊'),(3,'name3','123456',3,'nicktest','discribeyyxx'),(4,'AAA','AAA',2,'AAA','AAA'),(5,'BBB','BBBeee',2,'BBB','BBB'),(6,'CCC','CCC',2,'CCCee','CCCee'),(7,'DDD','DDD11',2,'DDDedit','DDDedit'),(11,'EEE','EEE',2,'EEE','EEEy'),(12,'222','222',3,'222','222');
 
 /* Procedure structure for procedure `split_time` */
 

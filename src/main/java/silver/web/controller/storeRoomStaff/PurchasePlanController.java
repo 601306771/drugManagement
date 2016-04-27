@@ -47,47 +47,80 @@ public class PurchasePlanController {
 		record.setPrices(0);
 		record.setState("NEW");
 		ob.insert(record);
+		record = ob.selectByOcode(ocode);
 		model.put("order", record);
 		return "pages/storeRoomStaff/purchasePlan/purchasePlanAddOrder";   
 	}
 
 	@RequestMapping("/addItems")
-	public String addItems(final String order_ocode, final String order_date,
-			final Integer order_prices, final String order_state, final String dname, 
-			final Integer prices,final Integer quantity,final ModelMap model, 
+	public String addItems(final Integer order_id, //维持订单信息
+			final String dname, final Integer prices,final Integer quantity,final ModelMap model, 
 			final HttpServletRequest request){
-		System.out.print(order_date);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date myDate = new Date();
-		try {
-			myDate = dateFormat.parse(order_date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+
 		
+		//订单信息
+		Orders order = ob.selectByPrimaryKey(order_id);
+		String order_ocode = order.getOcode();
 		
-		Orders order = new Orders();
-		order.setOcode(order_ocode);
-		order.setDate(myDate);
-		order.setPrices(order_prices);
-		order.setState(order_state);
-		
-		String ocode = order_ocode;
-		
+		//添加的条目信息
 		OrdersDetails record = new OrdersDetails();
+		System.out.println(dname);
 		record.setDname(dname);
 		record.setPrices(prices);
 		record.setQuantity(quantity);
-		record.setOcode(ocode);
+		record.setOcode(order_ocode);
+		odb.insertSelective(record);
 		
+		//查看所有的条目
 		List<OrdersDetails> ordersDetailsList= new ArrayList<OrdersDetails>();
-		ordersDetailsList = odb.selectByOcode(ocode);
+		ordersDetailsList = odb.selectByOcode(order_ocode);
+		for(int i = 0; i < ordersDetailsList.size() ; i++){
+			System.out.println(ordersDetailsList.get(i));
+		}
 		
 		model.put("order", order);
-		model.put("ocode", ocode);
 		model.put("ordersDetailsList", ordersDetailsList);
-		System.out.print("purchasePlanAddOrder");
 		return "pages/storeRoomStaff/purchasePlan/purchasePlanAddOrder";   
+	}
+	
+	
+	
+	@RequestMapping("/deleteItems")
+	public String deleteItems(final Integer orderId, final Integer orderDetailId,
+			final ModelMap model, final HttpServletRequest request){
+		
+		//订单信息
+		Orders order = ob.selectByPrimaryKey(orderId);
+		
+		//删除一个条目
+		odb.deleteByPrimaryKey(orderDetailId);
+		
+		//查看所有的条目
+		List<OrdersDetails> ordersDetailsList= new ArrayList<OrdersDetails>();
+		ordersDetailsList = odb.selectByOcode(order.getOcode());
+		
+		
+		model.put("order", order);
+		model.put("ordersDetailsList", ordersDetailsList);
+		return "pages/storeRoomStaff/purchasePlan/purchasePlanAddOrder";   
+	}
+	
+	@RequestMapping("/show")
+	public String show(final Integer orderId, 
+			final ModelMap model, final HttpServletRequest request){
+		
+		//订单信息
+		Orders order = ob.selectByPrimaryKey(orderId);
+		
+		
+		//查看所有的条目
+		List<OrdersDetails> ordersDetailsList= new ArrayList<OrdersDetails>();
+		ordersDetailsList = odb.selectByOcode(order.getOcode());
+		
+		
+		model.put("order", order);
+		model.put("ordersDetailsList", ordersDetailsList);
+		return "pages/storeRoomStaff/purchasePlan/purchasePlanShow";   
 	}
 	
 	

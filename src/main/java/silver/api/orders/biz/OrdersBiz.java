@@ -5,6 +5,8 @@ import java.util.List;
 import silver.api.orders.entity.Orders;
 
 public interface OrdersBiz {
+	Orders selectByOcode(String ocode);
+	
 	List<Orders> selectByState(String state);
 	
 	int deleteByPrimaryKey(Integer id);

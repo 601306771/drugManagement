@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
+	
 import silver.api.ordersDetails.biz.OrdersDetailsBiz;
 import silver.api.ordersDetails.dao.OrdersDetailsDao;
 import silver.api.ordersDetails.entity.OrdersDetails;
-import silver.api.ordersDetails.entity.OrdersDetailsKey;
 import silver.api.ordersDetails.mapper.OrdersDetailsMapper;
 
 @Service
@@ -23,10 +22,7 @@ public class OrdersDetailsBizImpl implements OrdersDetailsBiz {
 		return odd.selectByOcode(Ocode);
 	}
 
-	@Override
-	public int deleteByPrimaryKey(OrdersDetailsKey key) {
-		return odd.deleteByPrimaryKey(key);
-	}
+
 
 	@Override
 	public int insert(OrdersDetails record) {
@@ -38,10 +34,7 @@ public class OrdersDetailsBizImpl implements OrdersDetailsBiz {
 		return odd.insertSelective(record);
 	}
 
-	@Override
-	public OrdersDetails selectByPrimaryKey(OrdersDetailsKey key) {
-		return odd.selectByPrimaryKey(key);
-	}
+
 
 	@Override
 	public int updateByPrimaryKeySelective(OrdersDetails record) {
@@ -53,4 +46,13 @@ public class OrdersDetailsBizImpl implements OrdersDetailsBiz {
 		return odd.updateByPrimaryKey(record);
 	}
 
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		return odd.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public OrdersDetails selectByPrimaryKey(Integer id) {
+		return odd.selectByPrimaryKey(id);
+	}
 }

@@ -14,6 +14,14 @@
     id, OCODE, DATE, PRICES, STATE
   </sql>
   
+
+  <select id="selectByOcode" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where  OCODE = #{ocode,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectByState" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

@@ -40,19 +40,16 @@
 	<script type="text/javascript" src="${base}/resource/dialog/zDialog.js"></script>
 	
 	<script type="text/javascript">
-	 	/* function test(name){
-			 alert(name);
-			 document.getElementById(name);
-		 } */
+	 
 		function zOpen(name){
-			alert(name);
+			
 			var diag = new Dialog("Diag2");
 			ShowCloseButton=true;
 			diag.Drag=false;
 			diag.Width = 700;
 			diag.Height = 400;
 			diag.Title = "订单详情";
-			diag.URL = "${base}/orders/error?ocode=" + name;
+			diag.URL = "${base}/purchasePlan/show?orderId=" + name;
 			diag.show();
 		}
 	</script>
@@ -453,7 +450,7 @@
 														<td>${orders.prices}</td>
 														<td>${orders.state}</td>
 														<td>
-    														<a href='javascript:void(0);' onclick="zOpen('${orders.ocode}')" id = "${orders.ocode}"  value = "${orders.ocode}" class="btn btn-primary btn-circle"><i class="fa fa-list"></i></a>
+    														<a href='javascript:void(0);' onclick="zOpen('${orders.id}')" id = "${orders.id}"  value = "${orders.id}" class="btn btn-primary btn-circle"><i class="fa fa-list"></i></a>
 														</td>
 														<td><a href="${base}/orders/updateOrders?state=PASS&id=${orders.id}&ocode=${orders.ocode}&prices=${orders.prices}&date=${orders.date?datetime}" class="btn btn-info btn-circle" ><i class="fa fa-check"></i></a>&nbsp;
 															<a href="${base}/orders/updateOrders?state=REFUSE&id=${orders.id}&ocode=${orders.ocode}&prices=${orders.prices}&date=${orders.date?datetime}" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></a>

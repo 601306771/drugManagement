@@ -50,4 +50,9 @@ public class OrdersBizImpl implements OrdersBiz {
 		return od.selectByState(state);
 	}
 
+	@Override
+	public Orders selectByOcode(String ocode) {
+		return od.selectByOcode(ocode);
+	}
+
 }

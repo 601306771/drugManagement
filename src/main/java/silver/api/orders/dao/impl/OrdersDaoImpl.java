@@ -49,6 +49,11 @@ public class OrdersDaoImpl implements OrdersDao {
 	public List<Orders> selectByState(String state) {
 		return om.selectByState(state);
 	}
+
+	@Override
+	public Orders selectByOcode(String ocode) {
+		return om.selectByOcode(ocode);
+	}
 	
 	
 

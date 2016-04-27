@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import silver.api.ordersDetails.dao.OrdersDetailsDao;
 import silver.api.ordersDetails.entity.OrdersDetails;
-import silver.api.ordersDetails.entity.OrdersDetailsKey;
 import silver.api.ordersDetails.mapper.OrdersDetailsMapper;
 
 @Component
@@ -21,10 +20,7 @@ public class OrdersDetailsDaoImpl implements OrdersDetailsDao {
 		return odm.selectByOcode(Ocode);
 	}
 
-	@Override
-	public int deleteByPrimaryKey(OrdersDetailsKey key) {
-		return odm.deleteByPrimaryKey(key);
-	}
+
 
 	@Override
 	public int insert(OrdersDetails record) {
@@ -36,10 +32,7 @@ public class OrdersDetailsDaoImpl implements OrdersDetailsDao {
 		return odm.insertSelective(record);
 	}
 
-	@Override
-	public OrdersDetails selectByPrimaryKey(OrdersDetailsKey key) {
-		return odm.selectByPrimaryKey(key);
-	}
+
 
 	@Override
 	public int updateByPrimaryKeySelective(OrdersDetails record) {
@@ -49,6 +42,16 @@ public class OrdersDetailsDaoImpl implements OrdersDetailsDao {
 	@Override
 	public int updateByPrimaryKey(OrdersDetails record) {
 		return odm.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		return odm.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public OrdersDetails selectByPrimaryKey(Integer id) {
+		return odm.selectByPrimaryKey(id);
 	}
 
 }

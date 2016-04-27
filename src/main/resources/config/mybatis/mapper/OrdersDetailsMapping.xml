@@ -3,7 +3,7 @@
 <mapper namespace="silver.api.ordersDetails.mapper.OrdersDetailsMapper" >
   <resultMap id="BaseResultMap" type="silver.api.ordersDetails.entity.OrdersDetails" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <id column="OCODE" property="ocode" jdbcType="VARCHAR" />
+    <result column="OCODE" property="ocode" jdbcType="VARCHAR" />
     <result column="DNAME" property="dname" jdbcType="VARCHAR" />
     <result column="PRICES" property="prices" jdbcType="INTEGER" />
     <result column="QUANTITY" property="quantity" jdbcType="INTEGER" />
@@ -12,25 +12,22 @@
     id, OCODE, DNAME, PRICES, QUANTITY
   </sql>
   
-  
-  <select id="selectByOcode" resultMap="BaseResultMap" parameterType="String" >
+   <select id="selectByOcode" resultMap="BaseResultMap" parameterType="String" >
     select 
     <include refid="Base_Column_List" />
     from orders_details
     where  OCODE = #{ocode,jdbcType=VARCHAR}
   </select>
   
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="silver.api.ordersDetails.entity.OrdersDetailsKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from orders_details
     where id = #{id,jdbcType=INTEGER}
-      and OCODE = #{ocode,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="silver.api.ordersDetails.entity.OrdersDetailsKey" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from orders_details
     where id = #{id,jdbcType=INTEGER}
-      and OCODE = #{ocode,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="silver.api.ordersDetails.entity.OrdersDetails" >
     insert into orders_details (id, OCODE, DNAME, 
@@ -78,6 +75,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="silver.api.ordersDetails.entity.OrdersDetails" >
     update orders_details
     <set >
+      <if test="ocode != null" >
+        OCODE = #{ocode,jdbcType=VARCHAR},
+      </if>
       <if test="dname != null" >
         DNAME = #{dname,jdbcType=VARCHAR},
       </if>
@@ -89,14 +89,13 @@
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
-      and OCODE = #{ocode,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="silver.api.ordersDetails.entity.OrdersDetails" >
     update orders_details
-    set DNAME = #{dname,jdbcType=VARCHAR},
+    set OCODE = #{ocode,jdbcType=VARCHAR},
+      DNAME = #{dname,jdbcType=VARCHAR},
       PRICES = #{prices,jdbcType=INTEGER},
       QUANTITY = #{quantity,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-      and OCODE = #{ocode,jdbcType=VARCHAR}
   </update>
 </mapper>

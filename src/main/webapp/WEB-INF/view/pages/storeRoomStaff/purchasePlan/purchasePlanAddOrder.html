@@ -169,11 +169,12 @@
 			                                     <th>订单日期</th>
 			                                     <th>订单价格</th>
 			                                     <th>订单状态</th>
+			                                     
 			                                 </tr>
 			                             </thead>
 			                             <tbody>
 			                             
-			                                 <tr class="warning">
+			                                 <tr class="success">
 			                                     <td>${order.ocode}</td>
 			                                     <td>${order.date?datetime}</td>
 			                                     <td>${order.prices}</td>
@@ -186,59 +187,65 @@
 			                  </#if>
 			                  
 			                  <#if ordersDetailsList??>
-			                  sdfsfsdf
-			                  	  	<#list ordersDetailsList as ordersDetails>
-			                  	  		${ordersDetails.ocode}
-			                  	  		${ordersDetails.dname}
-			                  	  		${ordersDetails.price}
-			                  	  		${ordersDetails.quantity}
-			                  	  	</#list>
+			                  		<div class="form-group has-success">
+										<label class="control-label" for="inputSuccess">条目信息</label>
+									</div>
+			                  		
+			                  		 <div class="table-responsive table-bordered">
+		                                <table class="table">
+		                                    <thead>
+		                                        <tr>
+		                                            <th>订单号</th>
+		                                            <th>药品名称</th>
+		                                            <th>价格</th>
+		                                            <th>数量</th>
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+		                                       <#list ordersDetailsList as ods>
+		                                       		<tr>
+							                  	  		<td>${ods.ocode}</td>
+							                  	  		<td>${ods.dname}</td>
+							                  	  		<td>${ods.prices}</td>
+							                  	  		<td>${ods.quantity}</td>
+							                  	  		<td>
+							                  	  			<a href="${base}/purchasePlan/deleteItems?orderId=${order.id}&orderDetailId=${ods.id}" class="btn btn-warning btn-circle"><i class="fa fa-times"></i></a>
+							                  	  		</td>
+							                  	  	</tr>
+			                  	  				</#list>
+			                  	  				<form action="${base}/purchasePlan/addItems">
+					                  	  	 		 <input type="hidden" name="order_id" value ="${order.id}"/>
+					                                
+					                                <tr>
+							                  		 	<td><div class="form-group has-success">
+															<label class="control-label" for="inputSuccess">药品名称</label>
+															<input name="dname" class="form-control" type="text">
+														</div></td>
+							                  		 	<td><div class="form-group has-success">
+															<label class="control-label" for="inputSuccess">药品价格</label>
+															<input name="prices" class="form-control" type="text">
+														</div></td>
+														<td><div class="form-group has-success">
+															<label class="control-label" for="inputSuccess">药品数量</label>
+															<input name="quantity" class="form-control" type="text">
+														</div></td>
+							                  		 	<td><br><input type="submit"  class="btn btn-success" value="添加"></a></td>
+					                  		 		</tr>
+					                  		 	</form>
+		                                    </tbody>
+		                                </table>
+		                                 	
+		                            </div>
+		                            <!-- /.table-responsive -->
 			                  	  	
-			                  	  	 <form action="${base}/purchasePlan/addItems">
-			                  	  	 		<input type="hidden" name="order_ocode" value ="${order.ocode}"/>
-			                  	  	 		<input type="hidden" name="order_date" value ="${order.date?datetime}"/>
-			                  	  	 		<input type="hidden" name="order_prices" value ="${order.prices}"/>
-			                  	  	 		<input type="hidden" name="order_state" value ="${order.state}"/>
-               		                        <div class="table-responsive">
-			                                <table class="table">
-			                                    <thead>
-			                                        <tr>
-			                                            <th></th>
-			                                            <th></th>
-			                                            <th></th>
-			                                            <th></th>
-			                                        </tr>
-			                                    </thead>
-			                                    <tbody>
-			                                        <tr>
-					                  		 	<td><div class="form-group has-success">
-													<label class="control-label" for="inputSuccess">药品名称</label>
-													<input name="dname" class="form-control" type="text">
-												</div></td>
-					                  		 	<td><div class="form-group has-success">
-													<label class="control-label" for="inputSuccess">药品价格</label>
-													<input name="price" class="form-control" type="text">
-												</div></td>
-												<td><div class="form-group has-success">
-													<label class="control-label" for="inputSuccess">药品数量</label>
-													<input name="qunantity" class="form-control" type="text">
-												</div></td>
-					                  		 	<td><br><input type="submit"  class="btn btn-success" value="添加"></a></td>
-			                  		 		</tr>
-			                                    </tbody>
-			                                </table>
-			                            </div>
-			                            <!-- /.table-responsive -->	
-			                  		 
-			                  		 </form>
-			                  		 
+			                  		 <p>
+										<BR>
+										<a href = "${base}/purchasePlan/page" class="btn btn-success btn-lg btn-block" >完成采购订单</a>
+			                         </p>
 			                  <#else>
-			                  		88888 
 			                  		 <form action="${base}/purchasePlan/addItems">
-				                  		 <input type="hidden" name="order_ocode" value ="${order.ocode}"/>
-		                  	  	 		 <input type="hidden" name="order_date" value ="${order.date?datetime}"/>
-		                  	  	 		 <input type="hidden" name="order_prices" value ="${order.prices}"/>
-				                  	  	 <input type="hidden" name="order_state" value ="${order.state}"/>
+				                  		 <input type="hidden" name="order_id" value ="${order.id}"/>
+		                  	  	 		
                		                     <div class="table-responsive">
 			                                <table class="table">
 			                                    <thead>
@@ -257,11 +264,11 @@
 												</div></td>
 					                  		 	<td><div class="form-group has-success">
 													<label class="control-label" for="inputSuccess">药品价格</label>
-													<input name="price" class="form-control" type="text">
+													<input name="prices" class="form-control" type="text">
 												</div></td>
 												<td><div class="form-group has-success">
 													<label class="control-label" for="inputSuccess">药品数量</label>
-													<input name="qunantity" class="form-control" type="text">
+													<input name="quantity" class="form-control" type="text">
 												</div></td>
 					                  		 	<td><br><input type="submit"  class="btn btn-success" value="添加"></a></td>
 			                  		 		</tr>
