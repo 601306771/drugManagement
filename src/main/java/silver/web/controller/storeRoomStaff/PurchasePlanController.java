@@ -61,6 +61,10 @@ public class PurchasePlanController {
 		//订单信息
 		Orders order = ob.selectByPrimaryKey(order_id);
 		String order_ocode = order.getOcode();
+		int totalPrice = order.getPrices();
+		totalPrice += prices*quantity;
+		order.setPrices(totalPrice);
+		ob.updateByPrimaryKey(order);
 		
 		//添加的条目信息
 		OrdersDetails record = new OrdersDetails();

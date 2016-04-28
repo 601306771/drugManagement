@@ -35,7 +35,27 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	<script type="text/javascript" src="${base}/resource/dialog/zConsole.js"></script>
+	<script type="text/javascript" src="${base}/resource/dialog/zDrag.js"></script>
+	<script type="text/javascript" src="${base}/resource/dialog/zDialog.js"></script>
+	<script type="text/javascript">
+	 	function sureIn() { 
+	        if (!confirm("确认此订单已经入库吗？")) { 
+	            window.event.returnValue = false; 
+	        } 
+	    } 
+	
+		function zOpen(name){
+			var diag = new Dialog("Diag2");
+			ShowCloseButton=true;
+			diag.Drag=false;
+			diag.Width = 700;
+			diag.Height = 400;
+			diag.Title = "订单详情";
+			diag.URL = "${base}/purchasePlan/show?orderId=" + name;
+			diag.show();
+		}
+	</script>
 </head>
 
 <body>
@@ -82,7 +102,7 @@
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button">
-                                        <i class="fa fa-searc h"></i>
+                                        <i class="fa fa-search"></i>
                                     </button>
                                 </span>
                             </div>
@@ -91,25 +111,25 @@
 						
 						<!-- ********************************************************************** -->
                         <li>
-                            <a href="${base}/purchasePlan/page"><i class="fa  fa-shopping-cart" ></i> 采购计划</a>
+                            <a href="${base}/orders/newRequest"><i class="fa  fa-shopping-cart" ></i> 采购计划</a>
                         </li>
 						
                         <!-- ********************************************************************** -->
 						
                         <li>
-                            <a href="${base}/stockIn/stockInList"><i class="fa fa-ambulance"></i> 药品入库</a>
+                            <a href="${base}/reports/total"><i class="fa fa-ambulance"></i> 药品入库</a>
                         </li>
 						
 						<!-- ********************************************************************** -->
 
 						    <li>
-                            <a href="${base}/salesReturn/page"><i class="fa  fa-mail-reply"></i> 药品退货</a>
+                            <a href="${base}/reports/total"><i class="fa  fa-mail-reply"></i> 药品退货</a>
                         </li>
 						
 						<!-- ********************************************************************** -->
 
 						    <li>
-                            <a href="${base}/stockOut/stockOutList"><i class="fa fa-truck"></i> 药品出库</a>
+                            <a href="${base}/reports/total"><i class="fa fa-truck"></i> 药品出库</a>
                         </li>
 						
 						<!-- ********************************************************************** -->
@@ -139,7 +159,92 @@
 
         <!-- Page Content -->
         <div id="page-wrapper">
-           欢迎界面
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">药品入库</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+
+            <div class="row">
+				<div class="col-lg-1"></div> <!-- /.col-lg-2 -->
+
+                 <div class="col-lg-10">
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            	Order is put in storage
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+			                     <div class="table-responsive">
+						                 <table class="table">
+			                                	<#if (ordersList?size<1) >
+													<br><p class="fa fa-times" style = "font-size:32px;text-align: center;"> <code>没有需要入库的订单</code></p>
+												<#else>
+													
+				                                    <thead>
+				                                        <tr>
+				                                            <th>#</th>
+				                                            <th>订单编号</th>
+				                                            <th>日期</th>
+				                                            <th>总价</th>
+															<th>状态</th>
+															<th>详情</th>
+															<th>Handle</th>
+				                                        </tr>
+				                                    </thead>
+				                                    <tbody>
+				                                    	
+															  		
+														
+													
+												
+														<#assign x=1 />
+														<#if ordersList??>
+															<#list ordersList as orders>
+																<#if x%2 == 0>
+																    <tr class="warning">
+																<#else>
+																	<tr class="info">
+																</#if>
+																	
+																	<td>${x}</td>	
+																	
+																	<#assign x=x+1 />
+																	<td>${orders.ocode}</td>
+																	<td>${orders.date?datetime}</td>
+																	<td>${orders.prices}</td>
+																	<td>${orders.state}</td>
+																	<td>
+			    														<a href='javascript:void(0);' onclick="zOpen('${orders.id}')" id = "${orders.id}"  value = "${orders.id}" class="btn btn-primary btn-circle"><i class="fa fa-list"></i></a>
+																	</td>
+																	<td>
+																		<a onClick="sureIn()" href="${base}/stockIn/in?state=STOCKIN&id=${orders.id}&ocode=${orders.ocode}&prices=${orders.prices}&date=${orders.date?datetime}" class="btn btn-warning" >确认入库</a>
+																	</td>
+																</tr>
+															</#list>
+														</#if>
+				                                    </tbody>
+				                                </#if>
+			                                </table>
+			                            </div>
+			                            <!-- /.table-responsive -->	
+			                  		 
+			                 
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                   
+
+                   
+                </div>
+                <!-- /.col-lg-10 -->
+			</div>
+            <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
 
