@@ -25,8 +25,8 @@ public class SignInController {
 			return "pages/admin/adminWelcome";
 		}else if(utype==2){
 			return "pages/storeRoomStaff/storeRoomStaffWelcome";
-		}else if(utype==1){
-			return "error";
+		}else if(utype==3){
+			return "pages/pharmacyStaff/pharmacyStaffWelcome";
 		}
 		return "pages/login";   
 	}

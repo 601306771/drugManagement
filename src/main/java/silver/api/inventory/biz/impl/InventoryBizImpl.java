@@ -1,5 +1,7 @@
 package silver.api.inventory.biz.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +53,13 @@ public class InventoryBizImpl implements InventoryBiz {
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		return idao.deleteByPrimaryKey(id);
+	}
+
+
+
+	@Override
+	public List<Inventory> selectAll() {
+		return idao.selectAll();
 	}
 
 }

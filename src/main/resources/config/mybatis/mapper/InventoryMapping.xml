@@ -10,6 +10,13 @@
     id, DNAME, QUANTITY
   </sql>
   
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from inventory
+  </select>
+  
+  
    <select id="selectByDname" resultMap="BaseResultMap" parameterType="String" >
     select 
     <include refid="Base_Column_List" />

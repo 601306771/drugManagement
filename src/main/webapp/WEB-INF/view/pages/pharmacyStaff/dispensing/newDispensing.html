@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DRUG MANAGEMENT SYSTEM</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="${base}/resource/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="${base}/resource/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="${base}/resource/dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="${base}/resource/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="${base}/resource/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="${base}/resource/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+	<script type="text/javascript">
+	 	function sureDespensing() { 
+	        if (!confirm("订单号：${sellOrder.soCode} \r\n"
+                          +"日期：    ${sellOrder.day?datetime}\r\n"
+                          +"总价格：${sellOrder.price}")) { 
+	            window.event.returnValue = false; 
+	        } 
+	    } 
+	</script>
+	
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+       <div id="container" style="background-color:#ffffff;">
+		<div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">新销售单</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+
+            <div class="row">
+
+                 <div class="col-lg-12">
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            new dispensing
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                             <#if sellOrder??>
+			                     <div class="table-responsive">
+			                         <table class="table">
+			                         	
+			                             <thead>
+			                                 <tr>
+			                                     <th>订单编号</th>
+			                                     <th>订单日期</th>
+			                                     <th>订单价格</th>
+			                                     
+			                                 </tr>
+			                             </thead>
+			                             <tbody>
+			                             
+			                                 <tr class="success">
+			                                     <td>${sellOrder.soCode}</td>
+			                                     <td>${sellOrder.day?datetime}</td>
+			                                     <td>${sellOrder.price}</td>
+			                                 </tr>
+			                             </tbody>
+			                         </table>
+			                     </div>
+			                     <!-- /.table-responsive -->
+			                  </#if>
+			                  
+			                  <#if sellOrderDetailList??>
+			                  		<div class="form-group has-success">
+										<label class="control-label" for="inputSuccess">销售条目信息</label>
+									</div>
+			                  		
+			                  		 <div class="table-responsive table-bordered">
+		                                <table class="table">
+		                                    <thead>
+		                                        <tr>
+		                                            <th>销售单号</th>
+		                                            <th>日期</th>
+		                                            <th>药品名称</th>
+		                                            <th>价格</th>
+		                                            <th>数量</th>
+		                                        </tr>
+		                                    </thead>
+		                                    <tbody>
+		                                       <#list sellOrderDetailList as sods>
+		                                       		<tr>
+							                  	  		<td>${sods.soCode}</td>
+							                  	  		<td>${sods.day?datetime}</td>
+							                  	  		<td>${sods.drugName}</td>
+							                  	  		<td>${sods.price}</td>
+							                  	  		<td>${sods.quantity}</td>
+							                  	  		<td>
+							                  	  			<a href="${base}/dispensing/deleteItems?sellOrderId=${sellOrder.id}&sellOrderDetailId=${sods.id}" class="btn btn-warning btn-circle"><i class="fa fa-times"></i></a>
+							                  	  		</td>
+							                  	  	</tr>
+			                  	  				</#list>
+			                  	  				<form action="${base}/dispensing/addItems">
+					                  	  	 		 <input type="hidden" name="sellOrderId" value ="${sellOrder.id}"/>
+					                                <tr>
+							                  		 	<td><div class="form-group has-success">
+															<label class="control-label" for="inputSuccess">药品名称</label>
+															<input name="dname" class="form-control" type="text">
+														</div></td>
+							                  		 	<td><div class="form-group has-success">
+															<label class="control-label" for="inputSuccess">药品价格</label>
+															<input name="price" class="form-control" type="text">
+														</div></td>
+														<td><div class="form-group has-success">
+															<label class="control-label" for="inputSuccess">药品数量</label>
+															<input name="quantity" class="form-control" type="text">
+														</div></td>
+							                  		 	<td><br><input type="submit"  class="btn btn-success" value="添加"></a></td>
+					                  		 		</tr>
+					                  		 	</form>
+		                                    </tbody>
+		                                </table>
+		                                 	
+		                            </div>
+		                            <!-- /.table-responsive -->
+			                  	  	
+			                  		 <p>
+										<BR>
+										<a onClick="sureDespensing()" href = "${base}/dispensing/finish?sellOrderId=${sellOrder.id}" class="btn btn-success btn-lg btn-block" >完成订单</a>
+			                         </p>
+			                  <#else>
+			                  		 <form action="${base}/dispensing/addItems">
+				                  		<input type="hidden" name="sellOrderId" value ="${sellOrder.id}"/>
+		                  	  	 		
+               		                     <div class="table-responsive">
+			                                <table class="table">
+			                                    <thead>
+			                                        <tr>
+			                                            <th></th>
+			                                            <th></th>
+			                                            <th></th>
+			                                            <th></th>
+			                                        </tr>
+			                                    </thead>
+			                                    <tbody>
+			                                        <tr>
+					                  		 	<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品名称</label>
+													<input name="dname" class="form-control" type="text">
+												</div></td>
+					                  		 	<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品价格</label>
+													<input name="price" class="form-control" type="text">
+												</div></td>
+												<td><div class="form-group has-success">
+													<label class="control-label" for="inputSuccess">药品数量</label>
+													<input name="quantity" class="form-control" type="text">
+												</div></td>
+					                  		 	<td><br><input type="submit"  class="btn btn-success" value="添加"></a></td>
+			                  		 		</tr>
+			                                    </tbody>
+			                                </table>
+			                            </div>
+			                            <!-- /.table-responsive -->	
+			                  		 
+			                  		 </form>
+			                  		 
+			                  </#if>
+			                  
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                   
+
+                   
+                </div>
+                <!-- /.col-lg-10 -->
+			</div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+   <!-- jQuery -->
+    <script src="${base}/resource/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="${base}/resource/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="${base}/resource/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="${base}/resource/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

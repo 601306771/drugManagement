@@ -1,8 +1,12 @@
 package silver.api.inventory.dao;
 
+import java.util.List;
+
 import silver.api.inventory.entity.Inventory;
 
 public interface InventoryDao {
+	List<Inventory> selectAll();
+	
 	 Inventory selectByDname(String dname);
 		
 	    int deleteByPrimaryKey(Integer id);

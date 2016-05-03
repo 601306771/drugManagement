@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="silver.api.sellOrder.mapper.SellOrderMapper" >
+  <resultMap id="BaseResultMap" type="silver.api.sellOrder.entity.SellOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="SO_CODE" property="soCode" jdbcType="VARCHAR" />
+    <result column="DAY" property="day" jdbcType="TIMESTAMP" />
+    <result column="PRICE" property="price" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, SO_CODE, DAY, PRICE
+  </sql>
+  
+  <select id="selectBySocode" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sell_order
+    where SO_CODE = #{socode,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sell_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sell_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="silver.api.sellOrder.entity.SellOrder" >
+    insert into sell_order (id, SO_CODE, DAY, 
+      PRICE)
+    values (#{id,jdbcType=INTEGER}, #{soCode,jdbcType=VARCHAR}, #{day,jdbcType=TIMESTAMP}, 
+      #{price,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="silver.api.sellOrder.entity.SellOrder" >
+    insert into sell_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="soCode != null" >
+        SO_CODE,
+      </if>
+      <if test="day != null" >
+        DAY,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="soCode != null" >
+        #{soCode,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="silver.api.sellOrder.entity.SellOrder" >
+    update sell_order
+    <set >
+      <if test="soCode != null" >
+        SO_CODE = #{soCode,jdbcType=VARCHAR},
+      </if>
+      <if test="day != null" >
+        DAY = #{day,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="silver.api.sellOrder.entity.SellOrder" >
+    update sell_order
+    set SO_CODE = #{soCode,jdbcType=VARCHAR},
+      DAY = #{day,jdbcType=TIMESTAMP},
+      PRICE = #{price,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

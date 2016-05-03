@@ -36,6 +36,15 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+	<script type="text/javascript" language="javascript">   
+		function iFrameHeight() {   
+			var ifm= document.getElementById("common");   
+			var subWeb = document.frames ? document.frames["common"].document : ifm.contentDocument;   
+			if(ifm != null && subWeb != null) {
+			   ifm.height = subWeb.body.scrollHeight;
+			}   
+		}   
+	</script>
 </head>
 
 <body>
@@ -91,43 +100,43 @@
 						
 						<!-- ********************************************************************** -->
                         <li>
-                            <a href="${base}/purchasePlan/page"><i class="fa  fa-shopping-cart" ></i> 采购计划</a>
+                            <a href="${base}/purchasePlan/page" target="common"><i class="fa  fa-shopping-cart" ></i> 采购计划</a>
                         </li>
 						
                         <!-- ********************************************************************** -->
 						
                         <li>
-                            <a href="${base}/stockIn/stockInList"><i class="fa fa-ambulance"></i> 药品入库</a>
+                            <a href="${base}/stockIn/stockInList" target="common"><i class="fa fa-ambulance"></i> 药品入库</a>
                         </li>
 						
 						<!-- ********************************************************************** -->
 
 						    <li>
-                            <a href="${base}/salesReturn/page"><i class="fa  fa-mail-reply"></i> 药品退货</a>
+                            <a href="${base}/salesReturn/page" target="common"><i class="fa  fa-mail-reply"></i> 药品退货</a>
                         </li>
 						
 						<!-- ********************************************************************** -->
 
 						    <li>
-                            <a href="${base}/stockOut/stockOutList"><i class="fa fa-truck"></i> 药品出库</a>
-                        </li>
-						
-						<!-- ********************************************************************** -->
-
-						
-						    <li>
-                            <a href="${base}/reports/total"><i class="glyphicon  glyphicon-floppy-remove"></i> 报损</a>
+                            <a href="${base}/stockOut/stockOutList" target="common"><i class="fa fa-truck"></i> 药品出库</a>
                         </li>
 						
 						<!-- ********************************************************************** -->
 
 						
 						    <li>
-                            <a href="${base}/reports/total"><i class="glyphicon  glyphicon-search"></i> 盘点</a>
+                            <a href="${base}/breakage/page" target="common"><i class="glyphicon  glyphicon-floppy-remove"></i> 报损</a>
                         </li>
 						
 						<!-- ********************************************************************** -->
+
 						
+						    <li>
+                            <a href="${base}/Inventory/page" target="common"><i class="glyphicon  glyphicon-search"></i> 盘点</a>
+                        </li>
+						
+						<!-- ********************************************************************** -->
+							
 						
 						
                     </ul>
@@ -139,7 +148,8 @@
 
         <!-- Page Content -->
         <div id="page-wrapper">
-           欢迎界面
+       			<iframe name="common" id="common" src="${base}/welCome/storeRoomStaff" frameborder="false" scrolling="no" style="border:none;" width="100%"  
+       			 marginheight="0"  onLoad="iFrameHeight()"></iframe>
         </div>
         <!-- /#page-wrapper -->
 
