@@ -1,8 +1,12 @@
 package silver.api.inventory.mapper;
 
+import java.util.List;
+
 import silver.api.inventory.entity.Inventory;
 
 public interface InventoryMapper {
+	List<Inventory> selectAll();
+	
 	 Inventory selectByDname(String dname);
 	
     int deleteByPrimaryKey(Integer id);

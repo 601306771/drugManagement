@@ -1,9 +1,13 @@
 package silver.api.inventory.biz;
 
+import java.util.List;
+
 import silver.api.inventory.entity.Inventory;
 
 public interface InventoryBiz {
-	 Inventory selectByDname(String dname);
+		List<Inventory> selectAll(); 	
+	
+		Inventory selectByDname(String dname);
 		
 	    int deleteByPrimaryKey(Integer id);
 

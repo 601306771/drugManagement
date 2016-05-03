@@ -1,5 +1,7 @@
 package silver.api.inventory.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,6 +52,13 @@ public class InventoryDaoImpl implements InventoryDao {
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		return im.deleteByPrimaryKey(id);
+	}
+
+
+
+	@Override
+	public List<Inventory> selectAll() {
+		return im.selectAll();
 	}
 
 }
