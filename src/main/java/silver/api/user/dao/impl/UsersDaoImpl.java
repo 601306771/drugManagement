@@ -53,4 +53,9 @@ public class UsersDaoImpl implements UsersDao {
 		return uMapper.selectByUtype(utype);
 	}
 
+	@Override
+	public Users selectByName(String name) {
+		return uMapper.selectByName(name);
+	}
+
 }

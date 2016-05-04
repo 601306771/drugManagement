@@ -57,7 +57,10 @@
 </head>
 
 <body>
-
+ 	<#if session_utype != 1>
+ 		<p class="fa fa-times" style = "font-size:50px;text-align: center;"> <code>没有访问权限！ 请先登录对应账号</code></p>
+ 	<#else>
+ 	
     <div id="wrapper">
 
        <div id="container" style="background-color:#ffffff;">
@@ -118,14 +121,14 @@
 														
 														<#assign x=x+1 />
 														<td>${orders.ocode}</td>
-														<td>${orders.date?datetime}</td>
+														<td>${orders.date?string("yyyy-MM-dd HH:mm:ss")}</td>
 														<td>${orders.prices}</td>
 														<td>${orders.state}</td>
 														<td>
     														<a href='javascript:void(0);' onclick="zOpen('${orders.id}')" id = "${orders.id}"  value = "${orders.id}" class="btn btn-primary btn-circle"><i class="fa fa-list"></i></a>
 														</td>
-														<td><a href="${base}/orders/updateOrders?state=PASS&id=${orders.id}&ocode=${orders.ocode}&prices=${orders.prices}&date=${orders.date?datetime}" class="btn btn-info btn-circle" ><i class="fa fa-check"></i></a>&nbsp;
-															<a href="${base}/orders/updateOrders?state=REFUSE&id=${orders.id}&ocode=${orders.ocode}&prices=${orders.prices}&date=${orders.date?datetime}" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></a>
+														<td><a href="${base}/orders/updateOrders?state=PASS&id=${orders.id}&ocode=${orders.ocode}&prices=${orders.prices}&date=${orders.date?string("yyyy-MM-dd HH:mm:ss")}" class="btn btn-info btn-circle" ><i class="fa fa-check"></i></a>&nbsp;
+															<a href="${base}/orders/updateOrders?state=REFUSE&id=${orders.id}&ocode=${orders.ocode}&prices=${orders.prices}&date=${orders.date?string("yyyy-MM-dd HH:mm:ss")}" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></a>
 														</td>
 													</tr>
 												</#list>
@@ -150,7 +153,9 @@
 
     </div>
     <!-- /#wrapper -->
-
+	</div>
+	
+	</#if>
     <!-- jQuery -->
     <script src="${base}/resource/bower_components/jquery/dist/jquery.min.js"></script>
 

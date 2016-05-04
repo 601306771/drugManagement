@@ -29,10 +29,28 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+    
+		
+   		 function checkUser(){
+    	   var result = document.getElementById("name").value;
+    	   var password = document.getElementById("password").value;
+    	   if(result == ""  ){
+    	     alert("用户名不能为空");
+    	     return false;
+    	   }
+    	   if(password == ""  ){
+    	    alert("密码不能为空");
+    	     return false;
+    	   }else{
+    	   return true;
+    	   }
+    	}
+    </script>
 
 </head>
 
-<body>
+<body >
 
     <div class="container">
     	
@@ -43,21 +61,23 @@
                         <h3 class="panel-title">Please Sign In </h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" id="formid"  name= "myform" method = 'post'  
+                          action = '${base}/signIn/loading' onsubmit = "return checkUser();" >
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="User-name" name="email" type="email" autofocus>
+                                    <input class="form-control" placeholder="User-name"  id="name"  name="name" type="text" autofocus >
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Password" id="password" name="password" type="password" value="">
                                 </div>
+                                <#if message??> <p style="color:red">登录失败：${message} </p></#if>
                                 <div class="checkbox">
                                     <label>
                                         <input name="remember" type="checkbox" value="Remember Me">Remember Me
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="${base}/signIn/loading?utype=1" class="btn btn-lg btn-success btn-block">Login</a>
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
                             </fieldset>
                         </form>
                     </div>

@@ -56,7 +56,8 @@ public class PurchasePlanController {
 	public String addItems(final Integer order_id, //维持订单信息
 			final String dname, final Integer prices,final Integer quantity,final ModelMap model, 
 			final HttpServletRequest request){
-
+		
+		System.out.print("addItems");
 		
 		//订单信息
 		Orders order = ob.selectByPrimaryKey(order_id);

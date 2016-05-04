@@ -13,18 +13,18 @@ public class WelcomePageController {
 		@RequestMapping("admin")
 		public String page1(final ModelMap model, 
 				final HttpServletRequest request){	
-			return "error";   
+			return "welcome";   
 		}
 		@RequestMapping("storeRoomStaff")
 		public String page2(final ModelMap model, 
 				final HttpServletRequest request){	
-			return "error";   
+			return "welcome";   
 		}
 		
 		@RequestMapping("pharmacyStaff")
 		public String page3(final ModelMap model, 
 				final HttpServletRequest request){	
-			return "error";   
+			return "welcome";   
 		}
 		
 
