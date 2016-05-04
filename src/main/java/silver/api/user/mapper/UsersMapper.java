@@ -5,6 +5,8 @@ import java.util.List;
 import silver.api.user.entity.Users;
 
 public interface UsersMapper {
+	Users selectByName(String name);
+	
 	List<Users> selectByUtype(Integer utype);
 	
     int deleteByPrimaryKey(Integer id);

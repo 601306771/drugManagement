@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DRUG MANAGEMENT SYSTEM</title>
+    <title>药房管理系统</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="${base}/resource/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -72,7 +72,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li><i class="fa fa-gear fa-fw"></i> Welcome Admin,name</li>
+                <li><i class="fa fa-gear fa-fw"></i> 欢迎您系统管理员,${session_unickname}</li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -81,7 +81,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> 个人设置</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>退出</a>
+                        <li><a href="${base}/signIn/signOut"><i class="fa fa-sign-out fa-fw"></i>退出</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

@@ -52,4 +52,9 @@ public class UsersBizImpl implements UsersBiz {
 		return uDao.selectByUtype(utype);
 	}
 
+	@Override
+	public Users selectByName(String name) {
+		return uDao.selectByName(name);
+	}
+
 }

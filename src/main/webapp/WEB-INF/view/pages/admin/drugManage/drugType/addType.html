@@ -33,7 +33,9 @@
 </head>
 
 <body>
-
+	<#if session_utype != 1>
+ 		<p class="fa fa-times" style = "font-size:50px;text-align: center;"> <code>没有访问权限！ 请先登录对应账号</code></p>
+ 	<#else>
     <div id="wrapper">
 
        <div id="container" style="background-color:#ffffff;">
@@ -66,7 +68,7 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div class="tab-pane fade in active" id="home-pills">
+                                <div class="tab-pane fade " id="home-pills">
                                    <div class="row">
 				
 										<div class="col-lg-1"></div>
@@ -109,7 +111,7 @@
 									</div>
 									<!-- /.row -->					 
 								</div>
-                                <div class="tab-pane fade" id="profile-pills">
+                                <div class="tab-pane fade in active" id="profile-pills">
                                     <div class="row">
 				
 										<div class="col-lg-1"></div>
@@ -187,8 +189,10 @@
         <!-- /#page-wrapper -->
 
     </div>
+    
+    </div>
     <!-- /#wrapper -->
-
+	</#if>
     <!-- jQuery -->
     <script src="${base}/resource/bower_components/jquery/dist/jquery.min.js"></script>
 

@@ -56,10 +56,11 @@ public class OrdersController {
 			final String date,final String state,final ModelMap model, 
 			final HttpServletRequest request){
 		
+		
 		//TODO 对页面的适配
 		Calendar c = Calendar.getInstance();//获得一个日历的实例   
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
-	    Date times = null;   
+	    Date times = null; 
 	    try{   
 	    	times = sdf.parse(date);//初始日期   
 	    }catch(Exception e){  

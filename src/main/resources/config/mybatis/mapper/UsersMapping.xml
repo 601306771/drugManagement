@@ -14,6 +14,14 @@
   </sql>
   
   <!-- ************分割*************** -->
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where UNAME = #{name,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- ************分割*************** -->
   <select id="selectByUtype" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

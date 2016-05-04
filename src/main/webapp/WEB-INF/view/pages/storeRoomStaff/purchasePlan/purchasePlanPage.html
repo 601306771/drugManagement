@@ -39,7 +39,9 @@
 </head>
 
 <body>
-
+	<#if session_utype != 2>
+ 		<p class="fa fa-times" style = "font-size:50px;text-align: center;"> <code>没有访问权限！ 请先登录对应账号</code></p>
+ 	<#else>
     <div id="wrapper">
 
         <div id="container" style="background-color:#ffffff;">
@@ -86,7 +88,7 @@
 
     </div>
     <!-- /#wrapper -->
-
+	</#if>
    <!-- jQuery -->
     <script src="${base}/resource/bower_components/jquery/dist/jquery.min.js"></script>
 
