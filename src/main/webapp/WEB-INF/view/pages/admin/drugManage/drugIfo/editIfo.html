@@ -44,7 +44,7 @@
             <div class="row">
 				<div class="col-lg-1"></div>
                 <div class="col-lg-10">
-                    <h1 class="page-header">Edit User</h1>
+                    <h1 class="page-header">编辑药品信息</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -55,7 +55,7 @@
 				
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Edit User Info
+                           药品信息
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -67,12 +67,12 @@
 											
 												<div class="form-group">
 		                                            <label>Dcode</label>
-		                                            <select name="codes" class="form-control">
+		                                            <select name="dtype" class="form-control">
 		                                                <#list detailType as list>
-		                                                	<#if drugIfo.dcode==list.dcode>
-		                                                		<option value="${list.tcode},${list.dcode}" selected>tcode：${list.tcode}，细分类名称：${list.dname}</option>
+		                                                	<#if drugIfo.dtype==list.dname>
+		                                                		<option value="${list.dname}" selected>分类名称：${list.dname}</option>
 															<#else>
-																<option value="${list.tcode},${list.dcode}">tcode：${list.tcode}，细分类名称：${list.dname}</option>
+																<option value="${list.dname}">分类名称：${list.dname}</option>
 															</#if>
 														</#list>
 		                                            </select>
@@ -82,8 +82,14 @@
 	                                        <div class="form-group">
 	                                            <label>药品名称</label>
 	                                            <input class="form-control" name="dname" value="${drugIfo.dname}" >
-	                                            <p class="help-block">This is the only name for sign in.</p>
+	                                            <p class="help-block">药品的命名</p>
 	                                        </div>
+	                                        
+	                                         <div class="form-group">
+	                                            <label>价格</label>
+	                                            <input class="form-control" name="price"  value="${drugIfo.price}">
+	                                        </div>
+	                                        
 	                                        <div class="form-group">
 	                                            <label>用量</label>
 	                                            <input class="form-control" name="dusage" value="${drugIfo.dusage}" placeholder="Enter password, default is 123456">

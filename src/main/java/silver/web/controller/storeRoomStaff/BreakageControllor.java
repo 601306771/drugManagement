@@ -21,18 +21,32 @@ public class BreakageControllor {
 	
 	@RequestMapping("/page")
 	public String page(final ModelMap model,final HttpServletRequest request){
+		//获得库存
+		List<Inventory> inventoryList = ib.selectAll();
+		model.put("inventoryList", inventoryList);
 		return "pages/storeRoomStaff/breakage/breakagePage";
 	}
 	
 	@RequestMapping("/sureBreak")
 	public String sureBreak(final String dname, final Integer quantity,
 			final ModelMap model,final HttpServletRequest request){	
-		Inventory it = ib.selectByDname(dname);
-		int newQuantity = it.getQuantity() - quantity;
-		it.setQuantity(newQuantity);
-		ib.updateByPrimaryKey(it);
-		model.put("it", it);
-		model.put("breakOk", "breakOk");
+		if(dname!=null && quantity!=null){
+			Inventory it = ib.selectByDname(dname);
+			int newQuantity = it.getQuantity() - quantity;
+			it.setQuantity(newQuantity);
+			ib.updateByPrimaryKey(it);
+			//获得库存
+			List<Inventory> inventoryList = ib.selectAll();
+			model.put("inventoryList", inventoryList);
+			
+			model.put("it", it);
+			model.put("breakOk", "breakOk");
+			return "pages/storeRoomStaff/breakage/breakagePage";
+		}
+		//获得库存
+		List<Inventory> inventoryList = ib.selectAll();
+		model.put("inventoryList", inventoryList);
+		model.put("breakFail", "breakFail");
 		return "pages/storeRoomStaff/breakage/breakagePage";
 	}
 	

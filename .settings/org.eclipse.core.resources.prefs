@@ -10,5 +10,6 @@ encoding//src/main/webapp/WEB-INF/view/pages/admin/drugManage/drugType/addType.h
 encoding//src/main/webapp/WEB-INF/view/pages/admin/drugManage/drugType/editType.html=UTF-8
 encoding//src/main/webapp/WEB-INF/view/pages/admin/supplierManage/editSupplier.html=UTF-8
 encoding//src/main/webapp/WEB-INF/view/pages/admin/usersManage/storeroomStaffList.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/pages/doctor/prescribe/select.html=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

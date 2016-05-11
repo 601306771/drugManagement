@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import silver.api.drugInformation.biz.DrugInformationBiz;
+import silver.api.drugInformation.entity.DrugInformation;
 import silver.api.orders.biz.OrdersBiz;
 import silver.api.orders.entity.Orders;
 import silver.api.ordersDetails.biz.OrdersDetailsBiz;
@@ -26,6 +28,8 @@ public class PurchasePlanController {
 	private OrdersBiz ob;
 	@Autowired
 	private OrdersDetailsBiz odb;
+	@Autowired
+	private DrugInformationBiz dib;
 	
 	@RequestMapping("/page")
 	public String page(final ModelMap model, 
@@ -48,6 +52,11 @@ public class PurchasePlanController {
 		record.setState("NEW");
 		ob.insert(record);
 		record = ob.selectByOcode(ocode);
+		
+		//从药品信息表获取药品
+		List<DrugInformation> drugList = dib.selectAll();
+		
+		model.put("drugList", drugList);
 		model.put("order", record);
 		return "pages/storeRoomStaff/purchasePlan/purchasePlanAddOrder";   
 	}
@@ -56,25 +65,28 @@ public class PurchasePlanController {
 	public String addItems(final Integer order_id, //维持订单信息
 			final String dname, final Integer prices,final Integer quantity,final ModelMap model, 
 			final HttpServletRequest request){
-		
-		System.out.print("addItems");
-		
+		System.out.println(order_id);
 		//订单信息
 		Orders order = ob.selectByPrimaryKey(order_id);
+		System.out.println(order);
 		String order_ocode = order.getOcode();
-		int totalPrice = order.getPrices();
-		totalPrice += prices*quantity;
-		order.setPrices(totalPrice);
-		ob.updateByPrimaryKey(order);
 		
-		//添加的条目信息
-		OrdersDetails record = new OrdersDetails();
-		System.out.println(dname);
-		record.setDname(dname);
-		record.setPrices(prices);
-		record.setQuantity(quantity);
-		record.setOcode(order_ocode);
-		odb.insertSelective(record);
+		if(dname!=null && prices!=null && quantity!=null && !"".equals(dname)  && !"".equals(prices)  && !"".equals(quantity)){
+			//更新价格
+			int totalPrice = order.getPrices();
+			totalPrice += prices*quantity;
+			order.setPrices(totalPrice);
+			ob.updateByPrimaryKey(order);
+			
+			//添加的条目信息
+			OrdersDetails record = new OrdersDetails();
+			System.out.println(dname);
+			record.setDname(dname);
+			record.setPrices(prices);
+			record.setQuantity(quantity);
+			record.setOcode(order_ocode);
+			odb.insertSelective(record);
+		}
 		
 		//查看所有的条目
 		List<OrdersDetails> ordersDetailsList= new ArrayList<OrdersDetails>();
@@ -83,6 +95,10 @@ public class PurchasePlanController {
 			System.out.println(ordersDetailsList.get(i));
 		}
 		
+		//从药品信息表获取药品
+		List<DrugInformation> drugList = dib.selectAll();
+		
+		model.put("drugList", drugList);
 		model.put("order", order);
 		model.put("ordersDetailsList", ordersDetailsList);
 		return "pages/storeRoomStaff/purchasePlan/purchasePlanAddOrder";   
@@ -104,7 +120,10 @@ public class PurchasePlanController {
 		List<OrdersDetails> ordersDetailsList= new ArrayList<OrdersDetails>();
 		ordersDetailsList = odb.selectByOcode(order.getOcode());
 		
+		//从药品信息表获取药品
+		List<DrugInformation> drugList = dib.selectAll();
 		
+		model.put("drugList", drugList);
 		model.put("order", order);
 		model.put("ordersDetailsList", ordersDetailsList);
 		return "pages/storeRoomStaff/purchasePlan/purchasePlanAddOrder";   

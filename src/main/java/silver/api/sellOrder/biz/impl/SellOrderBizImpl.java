@@ -1,5 +1,7 @@
 package silver.api.sellOrder.biz.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,11 @@ public class SellOrderBizImpl implements SellOrderBiz{
 	@Override
 	public SellOrder selectBySocode(String socode) {
 		return sod.selectBySocode(socode);
+	}
+
+	@Override
+	public List<SellOrder> selectByState(String state) {
+		return sod.selectByState(state);
 	}
 
 }

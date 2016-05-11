@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import silver.api.inventory.biz.InventoryBiz;
 import silver.api.inventory.entity.Inventory;
+import silver.api.orders.entity.Orders;
+import silver.api.ordersDetails.entity.OrdersDetails;
 import silver.api.sellOrder.biz.SellOrderBiz;
 import silver.api.sellOrder.entity.SellOrder;
 import silver.api.sellOrderDetail.biz.SellOrderDetailBiz;
@@ -36,21 +38,56 @@ public class DispensingContorller {
 	@RequestMapping("/page")
 	public String page(final ModelMap model,final HttpServletRequest request){
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		Date date = new java.util.Date();
-		String so_code = sdf.format(date);
-		SellOrder record = new SellOrder();
-		record.setSoCode(so_code);
-		record.setDay(date);
-		record.setPrice((float)0);
-		
-		sob.insert(record);
-		
-		record = sob.selectBySocode(so_code);
-		model.put("sellOrder", record);
-		  
+		List<SellOrder> sellOrderList = sob.selectByState("NEW");
+		model.put("sellOrderList", sellOrderList);
 		
 		return "pages/pharmacyStaff/dispensing/newDispensing";
+	}
+	
+	
+	
+	@RequestMapping("/done")
+	public String dispensing(final Integer id , final ModelMap model,final HttpServletRequest request){
+		//修改已发药的状态
+		SellOrder record = sob.selectByPrimaryKey(id);
+		record.setState("DONE");
+		sob.updateByPrimaryKey(record);
+		
+		//更新库存
+		List<SellOrderDetail> sellOrderDetailList= new ArrayList<SellOrderDetail>();
+		sellOrderDetailList = sodb.selectBySocode(record.getSoCode());
+		for(int i=0; i<sellOrderDetailList.size(); i++){
+			String dname = sellOrderDetailList.get(i).getDrugName();
+			int quantity = sellOrderDetailList.get(i).getQuantity();
+			
+			Inventory it = ib.selectByDname(dname);
+			int newQuantity = it.getQuantity() - quantity;
+			it.setQuantity(newQuantity);
+			ib.updateByPrimaryKey(it);
+		}
+		
+		
+		//查询没有发药的列表
+		List<SellOrder> sellOrderList = sob.selectByState("NEW");
+		model.put("sellOrderList", sellOrderList);
+		
+		return "pages/pharmacyStaff/dispensing/newDispensing";
+	}
+	
+	@RequestMapping("/show")
+	public String show(final Integer id , final ModelMap model,final HttpServletRequest request){
+		//订单信息
+		SellOrder record = sob.selectByPrimaryKey(id);
+		String socode = record.getSoCode();
+		
+		//查看所有的条目
+		List<SellOrderDetail> sellOrderDetailList= new ArrayList<SellOrderDetail>();
+		sellOrderDetailList = sodb.selectBySocode(socode);
+		
+		model.put("sellOrder", record);
+		model.put("sellOrderDetailList", sellOrderDetailList);
+		
+		return "pages/pharmacyStaff/dispensing/show";
 	}
 
 	

@@ -1,5 +1,7 @@
 package silver.api.sellOrder.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +47,11 @@ public class SellOrderDaoImpl implements SellOrderDao {
 	@Override
 	public SellOrder selectBySocode(String socode) {
 		return som.selectBySocode(socode);
+	}
+
+	@Override
+	public List<SellOrder> selectByState(String state) {
+		return som.selectByState(state);
 	}
 
 }

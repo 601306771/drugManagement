@@ -12,7 +12,14 @@ import silver.api.drugInformation.entity.DrugInformation;
 public class DrugInformationBizImpl implements DrugInformationBiz {
 	@Autowired
 	private DrugInformationDao dDao;
-	
+
+
+
+	@Override
+	public List<DrugInformation> selectAll() {
+		return dDao.selectAll();
+	}
+
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		return dDao.deleteByPrimaryKey(id);
@@ -43,18 +50,5 @@ public class DrugInformationBizImpl implements DrugInformationBiz {
 		return dDao.updateByPrimaryKey(record);
 	}
 	
-	@Override
-	public List<DrugInformation> selectByTcode(String tcode) {
-		return dDao.selectByTcode(tcode);
-	}
-
-	@Override
-	public List<DrugInformation> selectByDcode(String dcode) {
-		return dDao.selectByDcode(dcode);
-	}
-
-	@Override
-	public List<DrugInformation> selectAll() {
-		return dDao.selectAll();
-	}
+	
 }

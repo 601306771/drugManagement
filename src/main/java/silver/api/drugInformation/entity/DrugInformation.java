@@ -5,9 +5,7 @@ public class DrugInformation {
 
     private String dname;
 
-    private String tcode;
-
-    private String dcode;
+    private String dtype;
 
     private String dusage;
 
@@ -18,19 +16,18 @@ public class DrugInformation {
     private String dsuitable;
 
     private String ddiscribe;
+
+    private Integer price;
+
     
     
-
-    public DrugInformation() {
-	}
-
-	@Override
+    @Override
 	public String toString() {
-		return "DrugInformation [id=" + id + ", dname=" + dname + ", tcode="
-				+ tcode + ", dcode=" + dcode + ", dusage=" + dusage
+		return "DrugInformation [id=" + id + ", dname=" + dname 
+				+ ", dtype=" + dtype + ", dusage=" + dusage
 				+ ", dexpirationdate=" + dexpirationdate + ", dindications="
 				+ dindications + ", dsuitable=" + dsuitable + ", ddiscribe="
-				+ ddiscribe + "]";
+				+ ddiscribe + ", price=" + price + "]";
 	}
 
 	public Integer getId() {
@@ -49,20 +46,13 @@ public class DrugInformation {
         this.dname = dname;
     }
 
-    public String getTcode() {
-        return tcode;
+    
+    public String getDtype() {
+        return dtype;
     }
 
-    public void setTcode(String tcode) {
-        this.tcode = tcode;
-    }
-
-    public String getDcode() {
-        return dcode;
-    }
-
-    public void setDcode(String dcode) {
-        this.dcode = dcode;
+    public void setDtype(String dtype) {
+        this.dtype = dtype;
     }
 
     public String getDusage() {
@@ -103,5 +93,13 @@ public class DrugInformation {
 
     public void setDdiscribe(String ddiscribe) {
         this.ddiscribe = ddiscribe;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }

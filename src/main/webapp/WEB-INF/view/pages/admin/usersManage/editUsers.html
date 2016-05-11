@@ -46,7 +46,7 @@
             <div class="row">
 				<div class="col-lg-1"></div>
                 <div class="col-lg-10">
-                    <h1 class="page-header">Edit User</h1>
+                    <h1 class="page-header">编辑用户</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -57,7 +57,7 @@
 				
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Edit User Info
+                            详情
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -66,28 +66,28 @@
 									<#if user??>
 	                                    <form role="form" action="${base}/users/updateIfo">
 	                                        <div class="form-group">
-	                                            <label>User Name</label>
+	                                            <label>用户名</label>
 	                                            <input class="form-control" name="uname" value="${user.uname}" disabled="true">
-	                                            <p class="help-block">This is the only name for sign in.</p>
+	                                            <p class="help-block">用户登陆的唯一凭证</p>
 	                                        </div>
 	                                        <div class="form-group">
-	                                            <label>Password</label>
-	                                            <input class="form-control" name="upassword" value="${user.upassword}" placeholder="Enter password, default is 123456">
+	                                            <label>密码</label>
+	                                            <input class="form-control" name="upassword" value="${user.upassword}" placeholder="密码">
 	                                        </div>
 											
 											<div class="form-group">
-	                                            <label>Re-enter-Password</label>
-	                                            <input class="form-control" name="re_password" value="${user.upassword}" placeholder="Enter password, default is 123456">
+	                                            <label>确认密码</label>
+	                                            <input class="form-control" name="re_password" value="${user.upassword}" placeholder="再次输入密码">
 	                                        </div>
 											
 											
 											<div class="form-group">
-	                                            <label>Nick name</label>
-	                                            <input class="form-control" name="unickname" value="${user.unickname}"placeholder="Your Nick name">
+	                                            <label>昵称</label>
+	                                            <input class="form-control" name="unickname" value="${user.unickname}"placeholder="昵称">
 	                                        </div>
 	                                        
 	                                        <div class="form-group">
-	                                            <label>Discribe</label>
+	                                            <label>描述</label>
 	                                            <textarea class="form-control" name="discribe" rows="3">${user.discribe}</textarea>
 	                                        </div>
 	                                        
@@ -95,8 +95,8 @@
 	                                       <input type="hidden" name="id" value="${user.id}" >
 	                                        
 	                                        <div style = "text-align:center;margin:0 auto;">
-												<button type="submit" class="btn btn-success">Submit Ifo</button>&nbsp;&nbsp;&nbsp;
-												<button type="reset" class="btn btn-warning">Reset Ifo</button>
+												<button type="submit" class="btn btn-success">确认修改</button>&nbsp;&nbsp;&nbsp;
+												<button type="reset" class="btn btn-warning">清空信息</button>
 											</div>
 	                                    </form>
                                     </#if>

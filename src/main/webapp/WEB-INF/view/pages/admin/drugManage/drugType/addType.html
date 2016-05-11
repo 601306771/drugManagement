@@ -43,7 +43,7 @@
             <div class="row">
 				
                 <div class="col-lg-10">
-                    <h1 class="page-header">Add New Drug Type</h1>
+                    <h1 class="page-header">新增分类</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -60,57 +60,15 @@
                         <div class="panel-body">
                             <!-- Nav tabs -->
                             <ul class="nav nav-pills">
-                                <li class="active"><a href="#home-pills" data-toggle="tab">新增总分类</a>
+                                <li class="active"><a href="#profile-pills" data-toggle="tab">新增细分类</a>
                                 </li>
-                                <li><a href="#profile-pills" data-toggle="tab">新增细分类</a>
+                                <li><a href="#home-pills" data-toggle="tab">新增总分类</a>
                                 </li>
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div class="tab-pane fade " id="home-pills">
-                                   <div class="row">
-				
-										<div class="col-lg-1"></div>
-										<div class="col-lg-8">
-											<div class="row">
-														
-														<div class="col-lg-9">
-														
-															<form role="form" action="${base}/totalDrugType/addType">
-																<div class="form-group">
-																	<label>总分类</label>
-																	<input class="form-control" name="tcode">
-																	<p class="help-block">This is the only sign to recognize totalType.</p>
-																</div>
-																
-																<div class="form-group">
-																	<label>分类名称</label>
-																	<input class="form-control" name="tname"  placeholder="type name">
-																</div>
-																
-																<div class="form-group">
-																	<label>描述</label>
-																	<input class="form-control" name="tdiscribe" placeholder="type discribe">
-																</div>
-																
-																<div style = "text-align:center;margin:0 auto;">
-																	<button type="submit" class="btn btn-success">Submit Ifo</button>&nbsp;&nbsp;&nbsp;
-																	<button type="reset" class="btn btn-warning">Reset Ifo</button>
-																</div>
-															</form>
-														</div>
-														<!-- /.col-lg-6 (nested) -->
-														<div class="col-lg-1"></div>
-													</div>
-													<!-- /.row (nested) -->
-											
-										</div>
-										<div class="col-lg-3"></div>
-									   <!-- /.col-lg-12 -->
-									</div>
-									<!-- /.row -->					 
-								</div>
+                                
                                 <div class="tab-pane fade in active" id="profile-pills">
                                     <div class="row">
 				
@@ -129,7 +87,7 @@
 																</div> -->
 																<#if typeList??>
 																	<div class="form-group">
-							                                            <label>Selects</label>
+							                                            <label>选择总分类</label>
 							                                            <select name="tcode" class="form-control">
 							                                                <#list typeList as list>
 																				<option value="${list.tcode}">总分类名称：${list.tname}</option>
@@ -144,16 +102,16 @@
 																<div class="form-group">
 																	<label>细分类</label>
 																	<input class="form-control" name="dcode">
-																	<p class="help-block">This is the only sign to recognize detailType.</p>
+																	<p class="help-block"></p>
 																</div>
 																<div class="form-group">
 																	<label>分类名称</label>
-																	<input class="form-control" name="dname"  placeholder="type name">
+																	<input class="form-control" name="dname"  placeholder="输入分类名称">
 																</div>
 																
 																<div class="form-group">
 																	<label>描述</label>
-																	<input class="form-control" name="ddiscribe" placeholder="type discribe">
+																	<input class="form-control" name="ddiscribe" placeholder="输入描述">
 																</div>
 																
 																<div style = "text-align:center;margin:0 auto;">
@@ -173,7 +131,49 @@
 									</div>
 									<!-- /.row -->	
 								</div>
-                            
+								<div class="tab-pane fade " id="home-pills">
+                                   <div class="row">
+				
+										<div class="col-lg-1"></div>
+										<div class="col-lg-8">
+											<div class="row">
+														
+														<div class="col-lg-9">
+														
+															<form role="form" action="${base}/totalDrugType/addType">
+																<div class="form-group">
+																	<label>总分类</label>
+																	<input class="form-control" name="tcode">
+																	<p class="help-block"></p>
+																</div>
+																
+																<div class="form-group">
+																	<label>分类名称</label>
+																	<input class="form-control" name="tname"  placeholder="输入分类名">
+																</div>
+																
+																<div class="form-group">
+																	<label>描述</label>
+																	<input class="form-control" name="tdiscribe" placeholder="输入分类描述">
+																</div>
+																
+																<div style = "text-align:center;margin:0 auto;">
+																	<button type="submit" class="btn btn-success">Submit Ifo</button>&nbsp;&nbsp;&nbsp;
+																	<button type="reset" class="btn btn-warning">Reset Ifo</button>
+																</div>
+															</form>
+														</div>
+														<!-- /.col-lg-6 (nested) -->
+														<div class="col-lg-1"></div>
+													</div>
+													<!-- /.row (nested) -->
+											
+										</div>
+										<div class="col-lg-3"></div>
+									   <!-- /.col-lg-12 -->
+									</div>
+									<!-- /.row -->					 
+								</div>
                             </div>
                         </div>
                         <!-- /.panel-body -->

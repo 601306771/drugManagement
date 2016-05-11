@@ -42,7 +42,7 @@
             <div class="row">
 				<div class="col-lg-1"></div>
                 <div class="col-lg-10">
-                    <h1 class="page-header">Add New User</h1>
+                    <h1 class="page-header">编辑供应商信息</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -53,7 +53,7 @@
 				
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Edit Supplier Info
+                            详细信息
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -62,33 +62,33 @@
 									<#if supplier??>
 	                                    <form role="form" action="${base}/supplier/updateSupplier">
 	                                        <div class="form-group">
-	                                            <label>Code</label>
+	                                            <label>标识号</label>
 	                                            <input class="form-control" name="scode" value="${supplier.scode}" disabled="true">
-	                                            <p class="help-block">This is the only sign to recognize suppliers</p>
+	                                            <p class="help-block"></p>
 	                                        </div>
 	                                        <div class="form-group">
-	                                            <label>Name</label>
-	                                            <input class="form-control" name="sname" value="${supplier.sname}" placeholder="company name">
+	                                            <label>供应商</label>
+	                                            <input class="form-control" name="sname" value="${supplier.sname}" placeholder="供应商列表">
 	                                        </div>
 											
 											<div class="form-group">
-	                                            <label>Phone</label>
-	                                            <input class="form-control" name="sphone" value="${supplier.sphone}" placeholder="company phone">
+	                                            <label>联系方式</label>
+	                                            <input class="form-control" name="sphone" value="${supplier.sphone}" placeholder="电话号码">
 	                                        </div>
 	                                        
 											<div class="form-group">
-	                                            <label>Address</label>
-	                                            <input class="form-control" name="saddress" value="${supplier.saddress}"  placeholder="address to find">
+	                                            <label>地址</label>
+	                                            <input class="form-control" name="saddress" value="${supplier.saddress}"  placeholder="通讯地址">
 	                                        </div>
 	                                        
 	                                        <div class="form-group">
-	                                            <label>Discribe</label>
+	                                            <label>描述</label>
 	                                            <textarea class="form-control" rows="3" name="sdiscribe">${supplier.sdiscribe} </textarea>
 	                                        </div>
 	                                       <input type="hidden" name="id" value="${supplier.id}">
 	                                        <div style = "text-align:center;margin:0 auto;">
-												<button type="submit" class="btn btn-success">Submit Ifo</button>&nbsp;&nbsp;&nbsp;
-												<button type="reset" class="btn btn-warning">Reset Ifo</button>
+												<button type="submit" class="btn btn-success">完成编辑</button>&nbsp;&nbsp;&nbsp;
+												<button type="reset" class="btn btn-warning">重置信息</button>
 											</div>
 	                                    </form>	
                                     </#if>

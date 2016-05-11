@@ -33,18 +33,18 @@ public class DrugInformationController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/selectTcode")
-	public String selectTcode(final String tcode,final ModelMap model,
-			final HttpServletRequest request){
-		//TODO 适配界面
-		try{
-			List<DrugInformation> drugInformationList = di.selectByTcode(tcode);
-			System.out.println(drugInformationList);
-		}catch(Exception e){
-			return "error";
-		}
-		return "userget";
-	}
+//	@RequestMapping("/selectTcode")
+//	public String selectTcode(final String tcode,final ModelMap model,
+//			final HttpServletRequest request){
+//		//TODO 适配界面
+//		try{
+//			List<DrugInformation> drugInformationList = di.selectByTcode(tcode);
+//			System.out.println(drugInformationList);
+//		}catch(Exception e){
+//			return "error";
+//		}
+//		return "userget";
+//	}
 	
 	
 	/**
@@ -54,19 +54,19 @@ public class DrugInformationController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/selectDcode")
-	public String selectDcode(final String dcode,final ModelMap model,
-			final HttpServletRequest request){
-		//TODO 适配界面
-		
-		try{
-			List<DrugInformation> drugInformationList = di.selectByDcode(dcode);
-			System.out.println(drugInformationList);
-		}catch(Exception e){
-			return "error";
-		}
-		return "userget";
-	}
+//	@RequestMapping("/selectDcode")
+//	public String selectDcode(final String dcode,final ModelMap model,
+//			final HttpServletRequest request){
+//		//TODO 适配界面
+//		
+//		try{
+//			List<DrugInformation> drugInformationList = di.selectByDcode(dcode);
+//			System.out.println(drugInformationList);
+//		}catch(Exception e){
+//			return "error";
+//		}
+//		return "userget";
+//	}
 	
 	
 	/**
@@ -125,24 +125,25 @@ public class DrugInformationController {
 	 * @return
 	 */
 	@RequestMapping("/addIfo")
-	public ModelAndView addIfo(final String dsuitable,final String dindications,final String dcode,final String codes,
+	public ModelAndView addIfo(final String dsuitable,final String dindications,final String dtype,
 			final String dexpirationdate,final String dusage,final String tcode,final String dname,
-			final String ddiscribe,final ModelMap model,
+			final Integer price, final String ddiscribe,final ModelMap model,
 			final HttpServletRequest request){
 		//TODO 适配界面
-		String[] temp = codes.split(",");
 		DrugInformation record = new DrugInformation();
 		record.setDsuitable(dsuitable);
 		record.setDindications(dindications);
 		record.setDexpirationdate(dexpirationdate);
 		record.setDusage(dusage);
-		record.setDcode(temp[1].trim());
-		record.setTcode(temp[0].trim());
+		record.setDtype(dtype);
 		record.setDname(dname);
 		record.setDdiscribe(ddiscribe);
+		record.setPrice(price);
+		
+		System.out.println(record);
 		
 		try{
-			di.insertSelective(record);
+			di.insert(record);
 		}catch(Exception e){
 			return new ModelAndView("redirect:/drugIfo/error");
 		}
@@ -184,22 +185,21 @@ public class DrugInformationController {
 	 */
 	@RequestMapping("/updateIfo")
 	public ModelAndView updateIfo(final Integer id,final String dsuitable,final String dindications,
-			final String dcode,final String tcode,final String codes,
+			final String dcode,final Integer price,final String dtype,
 			final String dexpirationdate,final String dusage,final String dname,
 			final String ddiscribe,final ModelMap model,
 			final HttpServletRequest request){
 		//TODO 适配界面
-		String[] temp = codes.split(",");
 		DrugInformation record = new DrugInformation();
 		record.setId(id);
 		record.setDsuitable(dsuitable);
 		record.setDindications(dindications);
 		record.setDexpirationdate(dexpirationdate);
 		record.setDusage(dusage);
-		record.setDcode(temp[1].trim());
-		record.setTcode(temp[0].trim());
+		record.setDtype(dtype);
 		record.setDname(dname);
 		record.setDdiscribe(ddiscribe);
+		record.setPrice(price);
 		System.out.println(record);
 		try{
 			di.updateByPrimaryKeySelective(record);
@@ -234,7 +234,7 @@ public class DrugInformationController {
 	 * @return
 	 */
 	@RequestMapping("/edit")
-	public String edit(final Integer id,final String dname,final String tcode,final String dcode,
+	public String edit(final Integer id,final String dname,final String dcode,final Integer price,
 			final String dusage,final String dexpirationdate,final String dindications,final String dsuitable,
 			final String ddiscribe,final ModelMap model, 
 			final HttpServletRequest request){
@@ -244,10 +244,10 @@ public class DrugInformationController {
 		record.setDindications(dindications);
 		record.setDexpirationdate(dexpirationdate);
 		record.setDusage(dusage);
-		record.setDcode(dcode);
-		record.setTcode(tcode);
+		record.setDtype(dcode);
 		record.setDname(dname);
 		record.setDdiscribe(ddiscribe);
+		record.setPrice(price);
 		
 		System.out.print(record);
 		//总分类列表
@@ -288,8 +288,7 @@ public class DrugInformationController {
 			record.setDindications(data);
 			record.setDexpirationdate(data);
 			record.setDusage(data);
-			record.setDcode(data);
-			record.setTcode(data);
+			record.setDtype(data);
 			record.setDname(data);
 			record.setDdiscribe(data);
 			di.insertSelective(record);

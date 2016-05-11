@@ -58,6 +58,8 @@ public class SignInController {
 					return "pages/storeRoomStaff/storeRoomStaffWelcome";
 				}else if(utype==3){
 					return "pages/pharmacyStaff/pharmacyStaffWelcome";
+				}else if(utype==4){
+					return "pages/doctor/doctorWelcome";
 				}
 			}else{
 				model.put("message", "密码错误");

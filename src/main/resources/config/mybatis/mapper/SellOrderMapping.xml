@@ -6,10 +6,19 @@
     <result column="SO_CODE" property="soCode" jdbcType="VARCHAR" />
     <result column="DAY" property="day" jdbcType="TIMESTAMP" />
     <result column="PRICE" property="price" jdbcType="REAL" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, SO_CODE, DAY, PRICE
+    id, SO_CODE, DAY, PRICE, STATE
   </sql>
+  
+  <select id="selectByState" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sell_order
+    where STATE = #{state,jdbcType=VARCHAR}
+  </select>
+  
   
   <select id="selectBySocode" resultMap="BaseResultMap" parameterType="String" >
     select 
@@ -31,9 +40,9 @@
   </delete>
   <insert id="insert" parameterType="silver.api.sellOrder.entity.SellOrder" >
     insert into sell_order (id, SO_CODE, DAY, 
-      PRICE)
+      PRICE, STATE)
     values (#{id,jdbcType=INTEGER}, #{soCode,jdbcType=VARCHAR}, #{day,jdbcType=TIMESTAMP}, 
-      #{price,jdbcType=REAL})
+      #{price,jdbcType=REAL}, #{state,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="silver.api.sellOrder.entity.SellOrder" >
     insert into sell_order
@@ -50,6 +59,9 @@
       <if test="price != null" >
         PRICE,
       </if>
+      <if test="state != null" >
+        STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -63,6 +75,9 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -78,6 +93,9 @@
       <if test="price != null" >
         PRICE = #{price,jdbcType=REAL},
       </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -85,7 +103,8 @@
     update sell_order
     set SO_CODE = #{soCode,jdbcType=VARCHAR},
       DAY = #{day,jdbcType=TIMESTAMP},
-      PRICE = #{price,jdbcType=REAL}
+      PRICE = #{price,jdbcType=REAL},
+      STATE = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

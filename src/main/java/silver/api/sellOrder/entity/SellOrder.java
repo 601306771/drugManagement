@@ -3,6 +3,8 @@ package silver.api.sellOrder.entity;
 import java.util.Date;
 
 public class SellOrder {
+	private String state;
+	
     private Integer id;
 
     private String soCode;
@@ -11,7 +13,17 @@ public class SellOrder {
 
     private Float price;
 
-    public Integer getId() {
+    
+    
+    public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Integer getId() {
         return id;
     }
 

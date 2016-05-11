@@ -13,7 +13,14 @@ import silver.api.drugInformation.mapper.DrugInformationMapper;
 public class DrugInformationDaoImpl implements DrugInformationDao {
 	@Autowired
 	private DrugInformationMapper dMapper;
+
 	
+
+	@Override
+	public List<DrugInformation> selectAll() {
+		return dMapper.selectAll();
+	}
+
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		return dMapper.deleteByPrimaryKey(id);
@@ -43,20 +50,7 @@ public class DrugInformationDaoImpl implements DrugInformationDao {
 	public int updateByPrimaryKey(DrugInformation record) {
 		return dMapper.updateByPrimaryKey(record);
 	}
-
-	@Override
-	public List<DrugInformation> selectByTcode(String tcode) {
-		return dMapper.selectByTcode(tcode);
-	}
-
-	@Override
-	public List<DrugInformation> selectByDcode(String dcode) {
-		return dMapper.selectByDcode(dcode);
-	}
-
-	@Override
-	public List<DrugInformation> selectAll() {
-		return dMapper.selectAll();
-	}
+	
+	
 	
 }

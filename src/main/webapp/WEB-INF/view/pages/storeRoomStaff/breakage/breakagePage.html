@@ -35,6 +35,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="${base}/resource/select/css/select2.min.css" rel="stylesheet" />
+		<script src="${base}/resource/select/js/jquery.min.js"></script>
+		<script src="${base}/resource/select/js/select2.min.js"></script>
+		<script src="${base}/resource/select/js/i18n/zh-CN.js"></script>
 
 	<script type="text/javascript">
 	 	function sureBreak() { 
@@ -46,14 +50,23 @@
 	 	function breakOk()
 	 	{
 	 		<#if it??>
-	 	   	   alert("报损成功！ 药品：${it.dname},数量：${it.quantity}");
+	 	   	   alert("报损成功！ 药品：${it.dname},库存数量：${it.quantity}");
 	 	    </#if>
+	 	}
+	 	
+	 	function breakFail()
+	 	{
+	 		
+	 	   	   alert("请输入正确的药名和数量，不能为空");
+	 	    
 	 	}
 	</script>
 </head>
 <#if breakOk??>
 	<body onload="breakOk()">
-<#else>  
+<#elseif breakFail??>  
+	<body onload="breakFail()">
+<#else>
 	<body >                     		
 </#if>
 
@@ -80,7 +93,7 @@
                  <div class="col-lg-10">
                      <div class="panel panel-default">
                         <div class="panel-heading">
-                            Damage to the registration
+                            报损详情
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -98,28 +111,43 @@
 										</thead>
 										<tbody>
 											<tr>
-										<td><div class="form-group has-success">
-											<label class="control-label" for="inputSuccess">药品名称</label>
-											<input name="dname" class="form-control" type="text">
-										</div></td>
-										<td><div class="form-group has-success">
-											<label class="control-label" for="inputSuccess">药品数量</label>
-											<input name="quantity" class="form-control" type="text">
-										</div></td>
+										<td>
+			                  		 		<div class="form-group has-success">
+												<label class="control-label" for="inputSuccess">药品名称:</label>
+												 <select  class="js-example-basic-single"   name="dname"  style="width: 100%" >
+										           <option ></option> 
+										           <#if inventoryList??>
+										           		<#list inventoryList as inventory>
+										           			<option value="${inventory.dname}">${inventory.dname}</option>
+										           		</#list>
+										           </#if>
+										      	 </select>
+									   		</div>    
+										</td>
+										<td>
+											<div class="form-group has-success">
+												<label class="control-label" for="inputSuccess">药品数量</label>
+												<input name="quantity" style="border: #9D9D9D 1px solid;width: 100% ;height:30px"  
+												onkeyup="this.value=this.value.replace(/\D/g,'')"  
+												onafterpaste="this.value=this.value.replace(/\D/g,'')"	
+												maxlength="5" type="text" placeholder="只能输入数字，不能为空">
+											</div>
+										</td>
 										<td><br><input onClick="sureBreak()" type="submit"  class="btn btn-success" value="报损"></a></td>
 									</tr>
 										</tbody>
+										
 									</table>
 								</div>
 								<!-- /.table-responsive -->	
 							 
 							 </form>
-							 
+							
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                   
+                    <br><br><br><br><br><br><br><br><br>
 
                    
                 </div>
@@ -133,8 +161,13 @@
     </div>
     <!-- /#wrapper -->
 	</#if>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+	  $(".js-example-basic-single").select2();
+	});
+	</script>
    <!-- jQuery -->
-    <script src="${base}/resource/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="${base}/resource/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
